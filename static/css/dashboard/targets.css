@@ -1,0 +1,12 @@
+#myButton {
+    width: 100px;
+    font-size: 13px;
+    color: #fff;
+}
+
+#myButton.selected {
+    background-color: #4c1864;
+    cursor: not-allowed;
+    pointer-events: none;
+    border: #4c1864;
+}

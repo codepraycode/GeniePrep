@@ -1,0 +1,195 @@
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+@import url("http://fonts.googleapis.com/css?family=Rokkitt:400,700");
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,600,700");
+@import url("http://fonts.googleapis.com/css?family=Helvetica+Neue:400,500,700");
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+body {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 200;
+    margin: 10px;
+    padding: 0px;
+}
+
+.Time {
+    border-radius: 5px;
+    background-color: crimson;
+    margin: 2px auto;
+    width: 85px;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+.check-bg {
+    padding: 5px;
+    background-color: #fff;
+    min-height: 50px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border: 1px solid #d5d5d5;
+}
+
+.begin-gne {
+    margin-top: 25px;
+    border-radius: 4px;
+    padding: 20px 15px;
+    min-height: 100px;
+    background-color: #fff;
+    border: 1px solid #e7e7e7;
+}
+
+.beg-ac {
+    background-color: #fff;
+    padding: 15px 2px 20px 2px;
+    color: #4b4b4b;
+    margin: -10px 5px 20px 5px;
+    border-radius: 4px;
+    border: 1px solid #e7e7e7;
+}
+
+.startbtn:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #4c1864;
+    box-shadow: 0px 15px 20px #8b7836a9;
+}
+
+.startbtn {
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    zoom: 1;
+    padding: 20px;
+    font-size: 15px;
+    color: #331a3f;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+}
+
+.slpbtn {
+    width: fit-content;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+    /*color: #331a3f;*/
+    background-color: #4c1864;
+    font-weight: 50;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.solid {
+    border-top: 2px solid #331a3f;
+    width: 200px;
+}
+
+hr {
+    border: 1px solid rgb(211, 193, 193);
+}
+
+.gn-ul li {
+    display: list-item;
+    font-size: 13px;
+    margin-bottom: 12px;
+    list-style: none;
+}
+
+.instruct ul li:before {
+    font-family: 'FontAwesome';
+    content: '\f058';
+    margin: 0 10px 10 -25px;
+    color: #331a3f;
+}
+
+.centered {
+    text-align: center;
+    font-size: 0;
+}
+
+.centered>div {
+    float: none;
+    display: inline-block;
+    text-align: left;
+    font-size: 13px;
+}
+
+
+/* Css Code for Calculator*/
+
+.calculator {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-30%, -35%);
+    width: 400px;
+}
+
+.calculator-screen {
+    width: 100%;
+    font-size: 5rem;
+    height: 80px;
+    border: none;
+    background-color: #252525;
+    color: #fff;
+    text-align: right;
+    padding-right: 20px;
+    padding-left: 10px;
+}
+
+.calculator button {
+    height: 60px;
+    background-color: #fff;
+    border-radius: 3px;
+    border: 1px solid #c4c4c4;
+    background-color: transparent;
+    font-size: 2rem;
+    color: #333;
+    background-image: linear-gradient(to bottom, transparent, transparent 50%, rgba(0, 0, 0, .04));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), inset 0 1px 0 0 rgba(255, 255, 255, .45), inset 0 -1px 0 0 rgba(255, 255, 255, .15), 0 1px 0 0 rgba(255, 255, 255, .15);
+    text-shadow: 0 1px rgba(255, 255, 255, .4);
+}
+
+.calculator button:hover {
+    background-color: #eaeaea;
+}
+
+.operator {
+    color: #337cac;
+}
+
+.all-clear {
+    background-color: #f0595f;
+    border-color: #b0353a;
+    color: #fff;
+}
+
+.all-clear:hover {
+    background-color: #f17377;
+}
+
+.equal-sign {
+    background-color: #2e86c0;
+    border-color: #337cac;
+    color: #fff;
+    height: 100%;
+    grid-area: 2 / 4 / 6 / 5;
+}
+
+.equal-sign:hover {
+    background-color: #4e9ed4;
+}
+
+.calculator-keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+}

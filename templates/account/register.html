@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %} {% static 'assets/images' as baseUrl %}
+
+<head>
+
+    <!-- META ============================================= -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />
+
+    <!-- DESCRIPTION -->
+    <meta name="description" content="Genie" />
+
+    <!-- OG -->
+    <meta property="og:title" content="Genie" />
+    <meta property="og:description" content="Genie" />
+    <meta property="og:image" content="" />
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON ============================================= -->
+    <link rel="icon" href="#" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="#" />
+
+    <!-- PAGE TITLE HERE ============================================= -->
+    <title>Genie Prep</title>
+
+    <!-- MOBILE SPECIFIC ============================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.min.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+    <!-- All PLUGINS CSS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/account/css/assets.css' %}">
+
+    <!-- TYPOGRAPHY ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/account/css/typography.css' %}">
+
+    <!-- SHORTCODES ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/account/css/shortcodes/shortcodes.css' %}">
+
+    <!-- STYLESHEETS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{%static 'css/account/css/style.css' %}">
+    <link class="skin" rel="stylesheet" type="text/css" href="{% static 'css/account/css/color/color-1.css' %}"> {% comment %}
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">{% endcomment %}
+</head>
+
+<body id="bg">
+
+    <div class="page-banner ovbl-dark" style="background-image:url(css/account/images/banner/banner3.jpg);">
+        <div class="container">
+
+            <div class="page-banner-entry">
+                <h1 class="text-white">Genie Prep</h1>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="heading-bx p text-center">
+        <h2 class="title-head">Register <span>Now</span></h2>
+        <p>Create an account today and begin with us</p>
+    </div>
+
+    <div class="page-wraper">
+        <!--<div id="loading-icon-bx"></div>-->
+
+        <form action="register" method="POST" enctype="multipart/form-data" class="account-form">
+            {% csrf_token %}
+            <!-- Column 1-->
+
+            <div class="account-form-inner">
+
+                <div class="account-container">
+                    <!--
+                    <div class="heading-bx left">
+                        
+                        <h2 class="title-head">Register <span>Now</span></h2>
+                    </div>-->
+
+
+
+                    <div class="row placeani">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <div class="d-flex" style="margin-bottom: 20px;">
+                                    <img id="output" src="{{baseUrl}}/profile/profile_placeholder.png" class="rounded" width="100" height="100" style="border-radius: 10px; border : 2px;" />
+                                    <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="picture" onchange="loadFile(event)" style="display: none;">
+                                    <label for="picture" style="cursor: pointer;" class="m-auto">Upload Image</label>
+
+
+                                    <script>
+                                        var loadFile = function(event) {
+                                            var image = document.getElementById('output');
+                                            image.src = URL.createObjectURL(event.target.files[0]);
+                                        };
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <div class="input-group">
+
+                                    <input name="firstname" type="text" required="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <div class="input-group">
+
+                                    <input name="lastname" type="text" required="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <div class="input-group">
+
+                                    <!--<input name="ccop" type="text" required="" class="form-control">-->
+                                    <select name="gender" id="school" class="form-control">
+                                        <option value="">----Select Gender----</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Your Email Address</label>
+                                <div class="input-group">
+                                    <input name="email" type="email" required="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="phone">Your Telephone Number</label>
+                                <div class="input-group">
+                                    <input name="telephone" type="tel" id="phone" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" maxlength="15" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row placeani">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <div class="input-group">
+
+                                    <input name="username" type="text" required="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <div class="input-group">
+
+                                    <input name="password" type="password" class="form-control" required="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <div class="input-group">
+
+                                    <input name="cpassword" type="password" class="form-control" required="">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--<div class="col-lg-12 m-b30">
+                                                        <button name="submit" type="submit" value="Submit" class="btn button-md">Register</button>
+                                                    </div>-->
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!--Column 2-->
+            <div class="account-form-inner">
+                <div class="account-container">
+
+                    <!--<form class="contact-bx">-->
+
+                    <div class="account-container">
+                        <div class="row placeani">
+                            <div class="col-lg-12">
+                                <hr>
+                                <div class="heading-bx p text-center">
+                                    <h2 class="title-head">More Info from <span>You</span></h2>
+                                    <p>Please make sure information entered are correct and recent</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="subjects">Select Subjects</label>
+                                    <select name='subjects' id='subjects' class="form-control" multiple>
+                                        <option value="math"> Mathematics </option>
+                                        <option value="eng"> English </option>
+                                        <option value="phy"> Physics </option>
+                                        <option value="chem"> Chemistry </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!--
+                                <label>Subjects</label><br>
+                                    <input type="checkbox" id="math" name="math" value="mathematics">
+                                    <label for="math">MATHEMATICS</label><br>
+                                    <input type="checkbox" id="english" name="english" value="english">
+                                    <label for="english"> English</label><br>
+                                    <input type="checkbox" id="physics" name="physics" value="physics">
+                                    <label for="physics"> Physics</label><br>
+                                    <input type="checkbox" id="chemistry" name="chemistry" value="chemistry">
+                                    <label for="chemistry"> Chemistry</label>
+                                
+                            -->
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Choice Of Institution</label>
+                                    <div class="input-group">
+                                        <!--<input name="coint" type="text" required="" class="form-control">-->
+                                        <select name="schools" id="school" class="form-control">
+                                                <option value="">----Select school----</option>
+                                                <option value="FEDERAL UNIVERSITY OF TECHNOLOGY AKURE"> FUTA</option>
+                                                <option value="UNIVERSITY OF LAGOS"> UNILAG</option>
+                                            </select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Course To Study</label>
+                                    <div class="input-group">
+
+                                        <!--<input name="ctstu" type="text" required="" class="form-control">-->
+                                        <select name="courses" id="courses" class="form-control">
+                                                <option value="">----Select Course----</option>
+                                                <option value="CSC">CSC</option>
+                                                <option vlaue="SEG">Sofware Engineering</option>
+                                                
+                                        </select>
+                                    </div>
+                                    <small class="text-left"><i>Course to study in your institution</i></small>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Course cutoff point</label>
+                                    <div class="input-group">
+
+                                        <input name="cutoff" type="text" required="" class="form-control">
+                                        <!--
+                                        <select name="cutoff" id="school">
+                                                <option value="">----Select Cutoff mark----</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+                                                <option value="40">40</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        -->
+
+                                    </div>
+                                    <small class="text-left"><i>Course of choice cutoff point</i>
+                                    </small>
+
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Jamb Score</label>
+                                    <div class="input-group">
+
+                                        <input name="jambscore" type="text" required="" class="form-control">
+                                    </div>
+                                    <small class="text-left"><i>Your current jamb score of out 400</i>
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>What do you aspire to score</label>
+                                    <div class="input-group">
+
+                                        <input name="wantscore" type="text" placeholder="e.g 75%" class="form-control" required="">
+                                    </div>
+                                    <small class="text-left"><i>what you plan to score in your post utme</i>
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 m-b30">
+                                <div class="d-flex">
+                                    <button name="submit" type="submit" value="Submit" class="btn button-md">Register</button>
+                                    <p class="text-center ml-auto">Already got an Account <a href="login" style="text-decoration: underline;">Click here</a></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--</form>-->
+                </div>
+            </div>
+        </form>
+
+        <hr>
+
+        <!-- Footer ==== -->
+        <footer>
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <a target="_blank" href="#"> &#169; Venom!. All rights reserved.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer END ==== -->
+        <button class="back-to-top fa fa-chevron-up"></button>
+    </div>
+
+    <!-- External JavaScripts -->
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'css/account/vendors/bootstrap-select/bootstrap-select.min.js' %}"></script>
+
+    {% comment %}
+    <script src="{% static 'css/account/js/functions.js' %}"></script>
+    <script src="{% static 'css/account/js/contact.js' %}"></script>
+
+    {% endcomment %}
+</body>
+
+</html>

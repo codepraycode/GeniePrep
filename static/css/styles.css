@@ -1,0 +1,129 @@
+:root {
+    --color: rebeccapurple;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F6F9FC;
+}
+
+.content {
+    border: 1px solid #F6F9FC;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 20px;
+    background-color: white;
+}
+
+.head {
+    background-color: white;
+    padding: 20px;
+}
+
+.question {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: #02203c;
+    text-align: left;
+}
+
+.nav_tab {
+    background-color: #F6F9FC;
+    margin-bottom: 12px;
+    padding-top: 12px;
+}
+
+input[type="radio"][disabled]+label {
+    color: #02203c;
+}
+
+input[type="radio"][disabled] {
+    border-color: #02203c;
+}
+
+.remark .good {
+    margin-top: -22px;
+    background-color: #5dcf46;
+    padding: 5px;
+    color: white;
+    margin-left: 20px;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 6px;
+    width: max-content;
+    font-size: 15px;
+}
+
+.remark .not-good {
+    background-color: #da5147;
+    margin-top: -22px;
+    padding: 5px;
+    color: white;
+    margin-left: 20px;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 6px;
+    width: max-content;
+    font-size: 15px;
+}
+
+.remark .fair {
+    background-color: #dacb47;
+    margin-top: -22px;
+    padding: 5px;
+    color: white;
+    margin-left: 20px;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 6px;
+    width: max-content;
+    font-size: 15px;
+}
+
+.correct {
+    border: 1px solid #5dcf46;
+    box-shadow: 0 10px 10px -5px #5dcf46;
+}
+
+.correct input[type="radio"]:checked {
+    background-color: #5dcf46;
+    border-color: #5dcf46;
+}
+
+.correct input[type="radio"]:checked+label {
+    color: #5dcf46;
+}
+
+.incorrect {
+    border: 1px solid #da5147;
+    box-shadow: 0 10px 10px -5px #da5147;
+}
+
+.incorrect input[type="radio"]:checked {
+    background-color: #da5147;
+    border-color: #da5147;
+}
+
+.incorrect input[type="radio"]:checked+label {
+    color: #da5147;
+}
+
+.bonus {
+    border: 1px solid #dacb47;
+    box-shadow: 0 10px 10px -5px #dacb47;
+}
+
+.bonus input[type="radio"]:checked {
+    background-color: #dacb47;
+    border-color: #dacb47;
+}
+
+.bonus input[type="radio"]:checked+label {
+    color: #dacb47;
+}

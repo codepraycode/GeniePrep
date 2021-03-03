@@ -1,0 +1,251 @@
+<!Doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/setup.css' %}" rel="stylesheet">
+    <!-- ClockPicker Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'dist/bootstrap-clockpicker.css' %}">
+
+    <!-- Font awesome Pro v5.10.0 CDN -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="container py-5">
+
+        <!-- For Setup heading -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mx-auto text-center">
+                <h3 class="display-4">Genie Prep</h3>
+                <span class="lead mb-0">Exam Setup
+                (Mode <strong>practise</strong>)</span>
+            </div>
+        </div>
+        <!-- End -->
+
+
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="bg-white rounded-lg shadow-sm p-5">
+
+                    <!--<p class="alert alert-success">Some text success or error</p>-->
+                    <form role="form" action="setup" method="POST">
+                        <div class="row ">
+                            <div class="col-auto me-auto mb-2">
+                                <p class="text-muted ">Select subject</p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="of_all_subject">
+                                    <label class="form-check-label" for="select_all_subject">
+                                                All
+                                            </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Subjects -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="subj1">
+                                    <label class="form-check-label" for="subj1">
+                                                English
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="col-8 ml-0">
+                                <div class="row row-cols-2">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <div class="input-group-text">from</div>
+                                            <input type="number" class="form-control " id="subj1_from" placeholder="set start">
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <div class="input-group-text">to</div>
+                                            <input type="number" class="form-control " id="subj1_to" placeholder="set stop">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="subj2">
+                                    <label class="form-check-label" for="subj2">
+                                                Mathematics
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="col-8 ml-0">
+                                <div class="row row-cols-2">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <div class="input-group-text">from</div>
+                                            <input type="number" class="form-control" id="subj2_from" placeholder="set start">
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <div class="input-group-text">to</div>
+                                            <input type="number" class="form-control" id="subj2_to" placeholder="set stop">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="subj3">
+                                    <label class="form-check-label" for="subj3">
+                                                Physics
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="col-8 ml-0">
+                                <div class="row row-cols-2">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <div class="input-group-text">from</div>
+                                            <input type="number" class="form-control" id="subj3_from" placeholder="set start">
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <div class="input-group-text">to</div>
+                                            <input type="number" class="form-control" id="subj3_to" placeholder="set stop">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="subj4">
+                                    <label class="form-check-label" for="subj1">
+                                                Chemistry
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="col-8 ml-0">
+                                <div class="row row-cols-2">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <div class="input-group-text">from</div>
+                                            <input type="number" class="form-control" id="subj4_from" placeholder="set start">
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <div class="input-group-text">to</div>
+                                            <input type="number" class="form-control" id="subj4_to" placeholder="set stop">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Subjects -->
+
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-4">
+
+
+                                <p class="text-muted ">Set time</p>
+
+
+
+                            </div>
+
+                            <div class="col-8">
+
+
+                                <div class="form-group">
+                                    <!-- Input group, just add class 'clockpicker', and optional data-* -->
+                                    <div class="input-group clockpicker" data-align="top" data-autoclose="true" data-twelvehour="true">
+                                        <input type="text" class="form-control" value="30:00" id="timerset">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-clock "></i>
+                                        </span>
+                                    </div>
+
+                                    <!-- <input type="time" class="form-control" id="#timersetupp"> -->
+                                    <!--<input id="timersetup" type="text">-->
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-3 text-center">
+                            <div class="col">
+                                Total Questions: 10
+                            </div>
+                            <div class="col">
+                                Time: 30mins
+                            </div>
+                        </div>
+
+                        <div class="row text-center">
+                            <div class="col">
+                                <button type="button" class="btn btn-primary   shadow-sm"> Let's GO  </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <!-- End -->
+
+
+                </div>
+                <!-- End -->
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+    <!-- ClockPicker script -->
+    <script type="text/javascript" src="{% static 'dist/bootstrap-clockpicker.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/setup.js' %}"></script>
+
+
+
+</body>
+
+</html>
