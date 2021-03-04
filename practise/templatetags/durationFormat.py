@@ -21,6 +21,7 @@ def durationVerbose(td):
     return "{}, {}".format(mins_s, secs_s)
 
 
+@register.filter
 def durationDigital(td):
     td = float(td)
     dur_sec = td * 60

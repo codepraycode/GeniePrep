@@ -35,6 +35,32 @@ def get_quest_range(sub, _from=4, _to=10):
 
     return quest_range
 
+def result(request):
+    '''subjects = {'ENG': 'English', 'MTH': 'Mathematics',
+                'PHY': 'Physics', 'CHM': 'Chemistry'}'''
+    """
+    Sample marked work
+    {'ENG': [{'No': '1', 'selected': 'D', 'correct': True, 'correction': 'D'}, {'No': '2', 'selected': 'C', 'correct': False, 'correction': 'B'}, {'No': '3', 'selected': 'D', 'correct': False, 'correction': 'B'}, {'No': '4', 'selected': 'A', 'correct': False, 'correction': 'D'}, {'No': '5', 'selected': 'B', 'correct': False, 'correction': 'C'}, {'No': '6', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '7', 'selected': None, 'correct': False, 'correction': 'B'}, {'No': '8', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '9', 'selected': None, 'correct': False, 'correction': 'D'}, {'No': '10', 'selected': None, 'correct': False, 'correction': 'C'}], 'max_score': 10, 'obtained': 1}
+    {'PHY': [{'No': '2', 'selected': 'C', 'correct': False, 'correction': 'B'}, {'No': '3', 'selected': 'B', 'correct': False, 'correction': 'A'}, {'No': '4', 'selected': None, 'correct': False, 'correction': 'B'}, {'No': '5', 'selected': 'D', 'correct': True, 'correction': 'D'}, {'No': '6', 'selected': 'B', 'correct': False, 'correction': 'A'}, {'No': '7', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '8', 'selected': None, 'correct': False, 'correction': 'B'}, {'No': '9', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '10', 'selected': None, 'correct': False, 'correction': 'A'}, {'No': '11', 'selected': None, 'correct': False, 'correction': 'D'}, {'No': '12', 'selected': None, 'correct': False, 'correction': 'A'}], 'max_score': 11, 'obtained': 1}
+
+    Got -> 2
+    Out of -> 21
+
+    """
+
+    
+
+    got = 2
+    total = 21
+    percent = got/total
+    print(percent)
+    testInfo = [
+        {'subject': 'English', 'score': 1, 'max_score': 10, 'percent': (1/total)},
+        {'subject': 'Physics', 'score': 1, 'max_score': 11, 'percent': (1/total)}
+        ]
+    
+    return render(request, 'result.html', {'score_sum': got, 'sum_total': total, 'sum_percent':percent, 'test_info':testInfo})
+
 '''
 def setup(request):
     return render(request, 'setup.html', {})
@@ -136,14 +162,15 @@ def practise(request):
         {'code': 'CHM', 'name': 'Chemistry'}
     ]  # Query this info from Cookie
 
-    test_data = request.COOKIES['testData']
-    # Sample output -> [{'name': 'English', 'start': '1', 'stop': '10', 'quest_range': 10}, {'name': 'Chemistry', 'start': '2', 'stop': '20', 'quest_range': 19}]
-    # print(decodeCookie(test_data))
-    test_data = decodeCookie(test_data)
+    
 
     
     
     if request.method == 'POST':
+        test_data = request.COOKIES['testData']
+        # Sample output -> [{'name': 'English', 'start': '1', 'stop': '10', 'quest_range': 10}, {'name': 'Chemistry', 'start': '2', 'stop': '20', 'quest_range': 19}]
+        # # print(decodeCookie(test_data))
+        test_data = decodeCookie(test_data)
         # print("Yes!!")
         script_data = request.POST #.keys()
 
@@ -165,6 +192,7 @@ def practise(request):
             script = d[2]
 
             marked_script = marker(script, sub_data)
+            print(marked_script)
             TotalScore += marked_script['obtained']
             TotalMax += marked_script['max_score']
 

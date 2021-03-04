@@ -41,7 +41,7 @@
                 <div class="col-9">
                     <nav class="row">
                         <div class="nav nav-tabs nav-justified nav-inline" id="nav-tab" role="tablist">
-                            {% for subject in subjects%} {% if forloop.counter == 1 %}
+                            {% for subject in subjects%} {% if forloop.counter is 1 %}
                             <button class="nav-link active" id="nav-{{subject}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{subject}}" type="button" role="tab" aria-controls="nav-{{subject}}" aria-selected="true">
                                         {{subject}}
                             </button> {% else %}
@@ -53,7 +53,7 @@
                     </nav>
                 </div>
                 <div class="col-3 text-center">
-                    <a class="btn btn-success" href="#">
+                    <a class="btn btn-success" href="{% url 'result' %}">
                         <i class="fas fa-arrow-circle-left"></i> Back</a>
                 </div>
             </div>
@@ -72,87 +72,87 @@
         <!-- errors go here -->
 
         <div class="tab-content mb-5" id="nav-tabContent">
-            {% for q in data %} 
-            
-            
-
-                <div {% if forloop.counter == 1 %} class="tab-pane fade show active" {% else %} class="tab-pane fade" {% endif %}
-                 id="nav-{{q.sub}}" role="tabpanel" aria-labelledby="nav-{{q.sub}}-tab">
-
-                
+            {% for q in data %}
 
 
-                    {% for d in q.subject_data %}
-                    <div {% if d.correct is True %} class="row content correct" {% elif d.correction is None %} class="row content bonus" {% else %} class="row content incorrect" {% endif %}>
 
-                        <div class="col-2">
-                            <h5 class="text-left p question">{{d.No}}
-                            </h5>
-                        </div>
+            <div {% if forloop.counter is 1 %} class="tab-pane fade show active" {% else %} class="tab-pane fade" {% endif %} id="nav-{{q.sub}}" role="tabpanel" aria-labelledby="nav-{{q.sub}}-tab">
 
-                        <!-- A -->
-                        <div class="col form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{q.code}}{{d.No}}" id="{{q.code}}inlineRadio1" {% if d.selected == 'A' %} checked {% endif %} disabled>
-                            <label class="form-check-label" for="{{q.code}}inlineRadio1">A</label>
-                        </div>
 
-                        <!-- B -->
-                        <div class="col form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{q.code}}{{d.No}}" id="{{q.code}}inlineRadio2" {% if d.selected == 'B' %} checked {% endif %} disabled>
-                            <label class="form-check-label" for="{{q.code}}inlineRadio2">B</label>
-                        </div>
 
-                        <!-- C -->
-                        <div class="col form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{q.code}}{{d.No}}" id="{{q.code}}inlineRadio3" {% if d.selected == 'C' %} checked {% endif %} disabled>
-                            <label class="form-check-label" for="{{q.code}}inlineRadio3">C</label>
-                        </div>
 
-                        <!-- D -->
-                        <div class="col form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{q.code}}{{d.No}}" id="{{q.code}}inlineRadio4" {% if d.selected == 'D' %} checked {% endif %} disabled>
-                            <label class="form-check-label" for="{{q.code}}inlineRadio4">D</label>
-                        </div>
+                {% for d in q.subject_data %}
+                <div {% if d.correct is True %} class="row content correct" {% elif d.correction is None %} class="row content bonus" {% else %} class="row content incorrect" {% endif %}>
+
+                    <div class="col-2">
+                        <h5 class="text-left p question">{{d.No}}
+                        </h5>
                     </div>
 
-                    <div class="remark ">
-                        {% comment %} if answer is correct -> You are right.... elif answer selected is None and answer's correction is None -> No bonus elif answer selected is not None and answer's correction is None -> Bonus elif answer selected is None and answer's correction
-                        is not None -> Missed else (if all condition above is not met) -> Missed {% endcomment %} {% if d.correct is True %}
-                        <div class="good">
-                            You got this Right. The answer is {{d.correction}}
-                        </div>
-
-                        {% elif d.correction is None and d.selected is None %}
-                        <div class="fair">
-                            This was Fair, there's No answer for this one.
-                        </div>
-
-                        {% elif d.correction is None and d.selected is not None %}
-                        <div class="fair">
-                            This was Fair, No answer was Given. <!--You Got the bonus.-->
-                        </div>
-
-                        {% elif d.correction is not None and d.selected is None %}
-                        <div class="not-good">
-                            You didn't pick anything, but the right answer is {{d.correction}}.
-                        </div>
-
-                        {% else %}
-                        <div class="not-good">
-                            You got this Wrong, the right answer is {{d.correction}}
-                        </div>
-
-                        {% endif %}
+                    <!-- A -->
+                    <div class="col form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{q.code}}{{d.No}}" id="{{q.code}}inlineRadio1" {% if d.selected is 'A' %} checked {% endif %} disabled>
+                        <label class="form-check-label" for="{{q.code}}inlineRadio1">A</label>
                     </div>
 
-                    {% endfor %}
+                    <!-- B -->
+                    <div class="col form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{q.code}}{{d.No}}" id="{{q.code}}inlineRadio2" {% if d.selected is 'B' %} checked {% endif %} disabled>
+                        <label class="form-check-label" for="{{q.code}}inlineRadio2">B</label>
+                    </div>
 
+                    <!-- C -->
+                    <div class="col form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{q.code}}{{d.No}}" id="{{q.code}}inlineRadio3" {% if d.selected is 'C' %} checked {% endif %} disabled>
+                        <label class="form-check-label" for="{{q.code}}inlineRadio3">C</label>
+                    </div>
+
+                    <!-- D -->
+                    <div class="col form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{q.code}}{{d.No}}" id="{{q.code}}inlineRadio4" {% if d.selected is 'D' %} checked {% endif %} disabled>
+                        <label class="form-check-label" for="{{q.code}}inlineRadio4">D</label>
+                    </div>
                 </div>
 
+                <div class="remark ">
+                    {% comment %} if answer is correct -> You are right.... elif answer selected is None and answer's correction is None -> No bonus elif answer selected is not None and answer's correction is None -> Bonus elif answer selected is None and answer's correction
+                    is not None -> Missed else (if all condition above is not met) -> Missed {% endcomment %} {% if d.correct is True %}
+                    <div class="good">
+                        You got this Right. The answer is {{d.correction}}
+                    </div>
+
+                    {% elif d.correction is None and d.selected is None %}
+                    <div class="fair">
+                        This was Fair, there's No answer for this one.
+                    </div>
+
+                    {% elif d.correction is None and d.selected is not None %}
+                    <div class="fair">
+                        This was Fair, No answer was Given.
+                        <!--You Got the bonus.-->
+                    </div>
+
+                    {% elif d.correction is not None and d.selected is None %}
+                    <div class="not-good">
+                        You didn't pick anything, but the right answer is {{d.correction}}.
+                    </div>
+
+                    {% else %}
+                    <div class="not-good">
+                        You got this Wrong, the right answer is {{d.correction}}
+                    </div>
+
+                    {% endif %}
+                </div>
 
                 {% endfor %}
 
-            
+            </div>
+
+
+            {% endfor %}
+
+
 
 
 
