@@ -39,7 +39,7 @@ $(function() {
         var answer_sheet = $("#sheet").serialize();
         console.log(answer_sheet);
 
-        /*
+
         $.ajax({
             type: "POST",
             url: "practise",
@@ -56,7 +56,7 @@ $(function() {
                 console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
             }
         });
-        */
+
     });
 
 });

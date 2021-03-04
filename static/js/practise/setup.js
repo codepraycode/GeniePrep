@@ -227,6 +227,7 @@ $(function() {
 
         $("#start").click(function(e) {
             console.log(subjects);
+            Cookies.remove('testData');
             Cookies.set('testData', JSON.stringify(subjects));
             //sessionStorage.setItem('testData', JSON.stringify(subjects));
             console.log("Start Practise");
