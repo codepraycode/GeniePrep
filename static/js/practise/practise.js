@@ -42,13 +42,13 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: "practise",
+            url: "/practise/",
             data: answer_sheet,
             //dataType: "json",
             success: function(data) {
                 //console.log(data, status);
                 console.log("answers Submitted");
-                // window.location = "";
+                window.location = `result?t=${data}`;
             },
             error: function(xhr, errmsg, err) {
                 $('#notify').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +

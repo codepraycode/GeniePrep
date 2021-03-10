@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <!-- FAVICONS ICON ============================================= -->
+    <link rel="icon" href="#" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="#" />
+
+    <!-- PAGE TITLE HERE ============================================= -->
+    <title>Genie Prep</title>
+
+    <!-- MOBILE SPECIFIC ============================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+
+    <link rel="stylesheet" href="{% static 'css/account/css/bootstrap-multiselect.min.css' %}" type="text/css" />
+
+    <!------ Include the above in your HEAD tag ---------->
+
+    <!-- Bootstrap CSS -->
+    <!--<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">-->
+
+    <style>
+        .register {
+            background: #fff;
+            margin-top: 3%;
+            padding: 3%;
+        }
+        
+        .register-left {
+            text-align: center;
+            color: #433367;
+            font-weight: 700;
+            margin-top: 4%;
+        }
+        
+        .register-left a {
+            text-decoration: none;
+            border: none;
+            border-radius: 1.5rem;
+            padding: 2%;
+            width: 60%;
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #383d41;
+            margin-bottom: 3%;
+            cursor: pointer;
+        }
+        
+        .login-sm a {
+            text-decoration: none;
+            border: none;
+            border-radius: 1.5rem;
+            padding: 2%;
+            width: 60%;
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #383d41;
+            margin-bottom: 3%;
+            cursor: pointer;
+        }
+        
+        .login-sm {
+            margin-top: 5px;
+            text-align: center;
+        }
+        
+        .register-right {
+            background: #fff;
+            -webkit-box-shadow: 3px 3px 5px 6px rgb(221, 213, 213);
+            /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+            -moz-box-shadow: 3px 3px 5px 6px #ccc;
+            /* Firefox 3.5 - 3.6 */
+            box-shadow: 3px 3px 5px 3px rgb(221, 213, 213);
+            /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+            /*
+            border-top-left-radius: 10% 50%;
+            border-bottom-left-radius: 10% 50%;
+            */
+        }
+        
+        .register-left img {
+            margin-top: 15%;
+            margin-bottom: 5%;
+            width: 25%;
+            -webkit-animation: mover 2s infinite alternate;
+            animation: mover 1s infinite alternate;
+        }
+        
+        @-webkit-keyframes mover {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes mover {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .register-left p {
+            font-weight: lighter;
+            padding: 12%;
+            margin-top: -9%;
+        }
+        
+        .register .register-form {
+            padding: 10%;
+            margin-top: 10%;
+        }
+        
+        .btnRegister {
+            float: right;
+            outline: none;
+            margin-top: 10%;
+            border: none;
+            border-radius: 1.5rem;
+            padding: 2%;
+            background: #0062cc;
+            color: #fff;
+            font-weight: 600;
+            width: 50%;
+            cursor: pointer;
+        }
+        
+        .btnLogin {
+            margin-top: 10%;
+            border: none;
+            border-radius: 1.5rem;
+            padding: 2%;
+            background: #0062cc;
+            color: #fff;
+            font-weight: 600;
+            width: 50%;
+            cursor: pointer;
+        }
+        
+        .register .nav-tabs {
+            margin-top: 3%;
+            border: none;
+            background: #0062cc;
+            border-radius: 1.5rem;
+            width: 300px;
+            float: right;
+        }
+        
+        .register .nav-tabs .nav-link {
+            padding: 2%;
+            height: 34px;
+            font-weight: 600;
+            color: #fff;
+            border-top-right-radius: 1.5rem;
+            border-bottom-right-radius: 1.5rem;
+        }
+        
+        .register .nav-tabs .nav-link:hover {
+            border: none;
+        }
+        
+        .register .nav-tabs .nav-link.active {
+            color: #0062cc;
+            border: 2px solid #0062cc;
+            border-top-left-radius: 1.5rem;
+            border-bottom-left-radius: 1.5rem;
+        }
+        
+        .register-heading {
+            text-align: center;
+            margin-top: 8%;
+            margin-bottom: -15%;
+            color: #495057;
+        }
+    </style>
+</head>
+
+<body>
+    {% block content%} {% endblock %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.js"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap-multiselect.min.js' %}"></script>
+
+
+    <script>
+        document.getElementById("profimage").onchange = function() {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("img").src = e.target.result;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        };
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#pickSubjects').multiselect();
+
+            $("#regMem").click(function() {
+                $("#regForm").submit();
+            });
+
+        });
+    </script>
+</body>
+
+</html>

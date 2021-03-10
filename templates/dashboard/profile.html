@@ -5,7 +5,7 @@
 <nav aria-label="breadcrumb" class="main-breadcrumb">
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Dashboard</li>
-        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+        <li class="breadcrumb-item active" aria-current="page">{{user.first_name}}'s Profile</li>
     </ol>
 </nav>
 <!-- /Breadcrumb -->
@@ -17,11 +17,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img src="{{baseUrl}}/profile/confirm.jpg" alt="Profile Picture" class="rounded-circle" width="150">
+                        <img src="/media/{{user.profileimg}}" alt="Profile Picture" class="rounded-circle" width="150">
                         <div class="mt-3">
-                            <h4>Olusola Precious</h4>
-                            <p class="text-secondary mb-1">olusola_precious</p>
-                            <p class="text-muted font-size-sm">preciousolusola16@gmail.com</p>
+                            <h4>{{user.last_name}} {{user.first_name}}</h4>
+                            <p class="text-secondary mb-1">{{user.username}}</p>
+                            <p class="text-muted font-size-sm">{{user.email}}</p>
 
                             <button class="btn btn-outline-primary">Edit Profile</button>
                         </div>
@@ -35,8 +35,8 @@
                 <h3 class="text-muted text-left m-3">School you aspire</h3>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-center align-items-center flex-wrap">
-                        <img src="{{baseUrl}}/futa.png" class="img-responsive img-circle center-block" alt="Subject-Tab">
-                        <span class="h6"><b></strong>Federal University Of Technology Akure</b></span>
+                        <img src="/media/{{user.institution.logo}}" class="img-responsive img-circle center-block" alt="Subject-Tab">
+                        <span class="h6"><b></strong>{{user.institution.name}}</b></span>
                     </li>
 
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -47,11 +47,11 @@
                         <h6 class="mb-0">
                             Course:
                         </h6>
-                        <span class="text-secondary">Software Engineering</span>
+                        <span class="text-secondary">{{user.course}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 class="mb-0">Cutoff:</h6>
-                        <span class="text-secondary">63 points</span>
+                        <span class="text-secondary">{{user.cutoff}} points</span>
                     </li>
 
                 </ul>
@@ -68,7 +68,7 @@
                             <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            Olusola Precious
+                            {{user.last_name}} {{user.first_name}}
                         </div>
                     </div>
                     <hr>
@@ -77,7 +77,7 @@
                             <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            preciousolusola16@gmail.com
+                            {{user.email}}
                         </div>
                     </div>
                     <hr>
@@ -86,7 +86,7 @@
                             <h6 class="mb-0">Phone</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            +234 8122137834
+                            {{user.phone_number}}
                         </div>
                     </div>
                     <hr>
@@ -95,7 +95,7 @@
                             <h6 class="mb-0">Gender</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            Male
+                            {{user.get_gender_display}}
                         </div>
                     </div>
                     <hr>
@@ -104,7 +104,7 @@
                             <h6 class="mb-0">Jamb Score</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            262
+                            {{user.jamb_score}}
                         </div>
                     </div>
                     <hr>
@@ -114,7 +114,7 @@
                         </div>
                         <div class="col-sm-3 col-xs-3 text-secondary">
 
-                            <input type="password" value="olusola70308" disabled/>
+                            <input type="password" value="{{user.password}}" disabled/>
 
                         </div>
                         <div class="col-sm-3 col-xs-3 ml-3 text-secondary">
@@ -132,7 +132,8 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Post Utme</i>Subjects</h6>
-                            <ul class="list-group list-group-flush">
+                            <!--
+                                <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                     <h6 class="mb-0">
                                         English
@@ -165,7 +166,10 @@
                                     <span class="text-secondary">12/24 (50%)</span>
                                 </li>
 
-                            </ul>
+                            </ul>-->
+                            <div class="row align-items-center">
+                                <h4 class="text-center text-muted my-5">This Feature is Under Construction</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -175,7 +179,8 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Post UTME</i>Target & Plan</h6>
-                            <ul class="list-group list-group-flush">
+                            <!--
+                                <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                     <h6 class="mb-0">
                                         English
@@ -210,6 +215,11 @@
 
                             </ul>
                             <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Genie Remark</i>Great!😎</h6>
+                        -->
+                            <div class="row align-items-center">
+                                <h4 class="text-center text-muted my-5">This Feature is Under Construction</h4>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -169,7 +169,7 @@ $(function() {
         // Make a the setup
         $.ajax({
             // Make a Ajax setup API
-            url: "practise?m=setup",
+            url: "/practise?m=setup",
             data: datar,
 
             success: function(data) {
