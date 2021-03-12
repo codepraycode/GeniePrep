@@ -1,0 +1,19 @@
+.slip_body {
+    margin: 0;
+    padding: 0;
+}
+
+.result {
+    margin: 100px auto;
+    border: 1px solid green;
+}
+
+.result .result_header {
+    padding: 50px;
+    background-color: #c9bece;
+}
+
+.result .exam_date {
+    text-align: right;
+    margin-bottom: 0px;
+}
