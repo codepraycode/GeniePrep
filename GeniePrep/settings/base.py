@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import dj_database_url
 from pathlib import Path
 import os
+import django_heroku
 #from getenv import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -137,9 +138,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+"""
 # Heroku: Update database configuration from $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-
+"""
+django_heroku.settings(locals())
 
