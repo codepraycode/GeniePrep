@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 static_path = os.path.join(BASE_DIR, 'assets')
 
 filepath = static_path + r'/answers.json'
-print("path =>",filepath)
+#print("path =>",filepath)
 
 with open(filepath) as file:
     data = json.loads(file.read())
