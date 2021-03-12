@@ -1,0 +1,1 @@
+web: gunicorn GeniePrep.wsgi --log-file -
