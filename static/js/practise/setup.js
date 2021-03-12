@@ -2,7 +2,7 @@ $(function() {
 
     //Select all Subjects
     $("#of_all_subject").click(function() {
-        $("#subj1").trigger('click');
+        $("#subj1").toggle('click');
         $("#subj2").trigger('click');
         $("#subj3").trigger('click');
         $("#subj4").trigger('click');
@@ -115,7 +115,7 @@ $(function() {
             // TODO: time changed
             var vale = this.value.slice(0, 5);
             $(this).val(vale);
-            console.log(vale);
+            // console.log(vale);
             //console.log($("#timeParse").text());
             //ParseTime(vale);
             $("#timeParse").text(ParseTime(vale));
@@ -202,9 +202,9 @@ $(function() {
                         questions += `${question_range} (${obj.start} to ${obj.stop}), `
                     });
 
-                    console.log(`Subjects => ${prep_subjects}`);
-                    console.log(`Questions => ${questions}`);
-                    console.log(`Time Duration => ${duration} mins`);
+                    // console.log(`Subjects => ${prep_subjects}`);
+                    // console.log(`Questions => ${questions}`);
+                    // console.log(`Time Duration => ${duration} mins`);
 
                     $(".ssetup").hide();
                     $(".instruction").show();
@@ -226,11 +226,11 @@ $(function() {
         });
 
         $("#start").click(function(e) {
-            console.log(subjects);
+            // console.log(subjects);
             Cookies.remove('testData');
             Cookies.set('testData', JSON.stringify(subjects));
             //sessionStorage.setItem('testData', JSON.stringify(subjects));
-            console.log("Start Practise");
+            // console.log("Start Practise");
             $("#page").load(`test?dur=${duration}`);
             //window.location = "test";
         });

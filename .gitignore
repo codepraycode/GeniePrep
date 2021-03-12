@@ -1,1 +1,15 @@
+# Vs code Folder
 .vscode
+
+# Unused html files
+templates\answersheet.html
+templates\check_test.html
+templates\instruction.html
+templates\instructions.html
+templates\register.html
+templates\result.html
+templates\setup.html
+templates\try.html
+
+# Database
+db.sqlite3

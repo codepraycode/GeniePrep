@@ -10,8 +10,5 @@ urlpatterns = [
 
     path('marker', views.marker, name="marker"),
     path('correction', views.correction, name="correction"),
-    path('dashboard', views.dashview, name="dashboard"),
-    path("profile", views.profile, name="profile"),
-    path("leaderboard", views.leaderBoard, name="leaderboard"),
-    path("records", views.records, name="records"),
+    
 ]

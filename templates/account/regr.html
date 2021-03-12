@@ -17,7 +17,7 @@
 
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab" aria-controls="first" aria-selected="true">Needed</a>
+                    <a class="nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab" aria-controls="first" aria-selected="true">Auth Details</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="sec-tab" data-toggle="tab" href="#second" role="tab" aria-controls="second" aria-selected="false">More About you</a>
@@ -27,7 +27,7 @@
             <br/>
 
             <form action="{% url 'register' %}" method="POST" enctype="multipart/form-data" id="regForm">
-                {% csrf_token %}
+                {% csrf_token %} {% autoescape on%}
                 <div class="tab-content" id="myTabContent">
 
                     <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab">
@@ -35,22 +35,22 @@
                         <div class="row register-form">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First Name *" name="firstname" />
+                                    <input type="text" class="form-control" placeholder="First Name *" name="firstname" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last Name *" name="lastname" />
+                                    <input type="text" class="form-control" placeholder="Last Name *" name="lastname" required/>
                                 </div>
 
                                 <div class="form-group">
-                                    <select class="form-control" name="gender">
-                                        <option class="hidden" selected disabled>Gender</option>
+                                    <select class="form-control" name="gender" required>
+                                        <option class="hidden" vlaue="M" selected disabled>Gender</option>
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Your Phone *" name="telephone" id="phone" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" maxlength="15" />
+                                    <input type="tel" class="form-control" placeholder="Your Phone *" name="telephone" id="phone" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" maxlength="15" required/>
                                 </div>
 
 
@@ -58,20 +58,20 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Your Email *" name="email" />
+                                    <input type="email" class="form-control" placeholder="Your Email *" name="email" required/>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Enter Your Username*" name="username" />
+                                    <input type="text" class="form-control" placeholder="Enter Your Username*" name="username" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password *" name="password" />
+                                    <input type="password" class="form-control" placeholder="Password *" name="password" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Confirm Password *" name="cpassword" />
+                                    <input type="password" class="form-control" placeholder="Confirm Password *" name="cpassword" required/>
                                 </div>
 
-                                <input type="button" class="btnRegister" value="Next" />
+                                <input type="button" class="btnRegister" value="Next" onclick="document.getElementById('sec-tab').click()" />
                             </div>
                         </div>
                     </div>
@@ -82,14 +82,14 @@
                         <div class="row register-form">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <select id="pickSubjects" name='subjects' multiple="multiple" aria-placeholder="Select subjects">
+                                    <select id="pickSubjects" name='subjects' multiple="multiple" aria-placeholder="Select subjects" required>
                                             {% for sub in subjects %}
                                             <option value="{{sub.code}}">{{sub.name}}</option>
                                             {% endfor %}
-                                            </select>
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <select class="form-control" name="schools">
+                                    <select class="form-control" name="schools" required>
                                                 <option class="hidden"  selected disabled>Your Choice Of Institution</option>
                                                 {% for school in schools %}
                                                 <option value="{{school.short_name}}">{{school.name}}</option>
@@ -98,7 +98,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <select class="form-control" name="courses">
+                                    <select class="form-control" name="courses" required>
                                                 <option class="hidden"  selected disabled>Course to study</option>
                                                 {% for course in courses %}
                                                 <option value="{{course.short_name}}">{{course.name}}</option>
@@ -107,14 +107,14 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Cut-off Point for Course" name="cutoff" />
+                                    <input type="number" min="20" class="form-control" placeholder="Cut-off Point for Course" name="cutoff" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Jamb Score" name="jambscore" />
+                                    <input type="number" min="100" class="form-control" placeholder="Jamb Score (out of 400)" name="jambscore" required/>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Target Score" name="wantscore" />
+                                    <input type="number" min="50" class="form-control" placeholder="PUTME Target Score (e.g 80%)" name="wantscore" required/>
                                 </div>
 
 
@@ -144,6 +144,7 @@
                     </div>
 
                 </div>
+                {% endautoescape %}
             </form>
         </div>
 

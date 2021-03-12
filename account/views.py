@@ -1,11 +1,15 @@
 from django.shortcuts import redirect, render
 from .models import Courses, Subjects
 from account.models import Schools, Genie_Users
+from practise.models import Subjects, TestLogs
 
 # Create your views here.
+
+ID_temp = 2110
+# Authentication Views
 def register(request):
     if request.method == 'POST':
-        
+        geID = 'GNI-' + str(ID_temp + 1)
         img = request.FILES.get("profimage")
         first_name = request.POST['firstname']
         last_name = request.POST['lastname']
@@ -41,6 +45,7 @@ def register(request):
                 pschool = Schools.objects.get(short_name=school)
                 pcourse = Courses.objects.get(short_name=course)
                 Guser = Genie_Users.objects.create(
+                    genieID = geID,
                     profileimg=img,
                     first_name=first_name, 
                     last_name=last_name,
@@ -83,12 +88,6 @@ def register(request):
         pass
     return render(request, 'account/regr.html', {'subjects':all_subjects, 'schools':all_schools, 'courses':all_courses})
 
-
-def registerr(request):
-   
-    return render(request, 'account/register.html', {})
-
-
 def login(request):
     if request.method == 'POST':
         # print(request.POST.keys())
@@ -108,7 +107,66 @@ def login(request):
     except: pass
     
 
+
     response = render(request, 'account/login.html', {})
-    response.delete_cookie('subjects') # clear cookie
+    response.delete_cookie('subjects') # clear subjects cookie
+    response.delete_cookie('testData') # clear tests cookie
 
     return response
+
+def logout(request):
+    return redirect('login')
+
+# Dashboard Views
+
+# Dashboard View
+def dashview(request):
+    try:
+        userID = request.session['GenieUser']
+    except:
+        return redirect('login')
+
+    user = Genie_Users.objects.get(id=userID)
+
+    # Subjects to store in cookie
+    subj = [{'code':s.code, 'name':s.name } for s in user.subjects.all() ]
+    # print(str(subj))
+
+    record_logs = TestLogs.objects.filter(Uid=user.id)
+
+    response = render(request, 'dashboard/dashmain.html', {'user':user, 'records':record_logs})
+    response.set_cookie('subjects', str(subj))
+    return response
+
+# Profile View
+def profile(request):
+    try:
+        userID = request.session['GenieUser']
+    except:
+        return redirect('login')
+    
+    user = Genie_Users.objects.get(id=userID)
+    return render(request, "dashboard/profile.html", {'user':user})
+
+def records(request):
+    try:
+        userID = request.session['GenieUser']
+    except:
+        return redirect('login')
+    # userID = request.session['GenieUser']
+    user = Genie_Users.objects.get(id=userID)
+
+    
+
+    record_logs = TestLogs.objects.filter(Uid=user.id)
+    # response = render(request, 'dashboard/dashmain.html', {'user':user, 'records':record_logs})
+    return render(request, "dashboard/records.html", {'user':user,'records':record_logs})
+
+
+
+
+def leaderBoard(request):
+    return render(request, "dashboard/leaderboard.html")
+
+
+

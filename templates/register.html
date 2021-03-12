@@ -88,6 +88,7 @@
 
                     <div class="row placeani">
                         <div class="col-lg-12">
+                            <!-- Profile Image -->
                             <div class="form-group">
                                 <div class="d-flex" style="margin-bottom: 20px;">
                                     <img id="output" src="{{baseUrl}}/profile/profile_placeholder.png" class="rounded" width="100" height="100" style="border-radius: 10px; border : 2px;" />
@@ -109,7 +110,7 @@
                                 <label>First Name</label>
                                 <div class="input-group">
 
-                                    <input name="firstname" type="text" required="" class="form-control">
+                                    <input name="firstname" type="text" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +120,7 @@
                                 <label>Last Name</label>
                                 <div class="input-group">
 
-                                    <input name="lastname" type="text" required="" class="form-control">
+                                    <input name="lastname" type="text" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -130,8 +131,8 @@
                                 <div class="input-group">
 
                                     <!--<input name="ccop" type="text" required="" class="form-control">-->
-                                    <select name="gender" id="school" class="form-control">
-                                        <option value="">----Select Gender----</option>
+                                    <select name="gender" id="school" class="form-control" required>
+                                        <option value="M">----Select Gender----</option>
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
                         
@@ -144,7 +145,7 @@
                             <div class="form-group">
                                 <label>Your Email Address</label>
                                 <div class="input-group">
-                                    <input name="email" type="email" required="" class="form-control">
+                                    <input name="email" type="email" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +154,7 @@
                             <div class="form-group">
                                 <label for="phone">Your Telephone Number</label>
                                 <div class="input-group">
-                                    <input name="telephone" type="tel" id="phone" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" maxlength="15" class="form-control">
+                                    <input name="telephone" type="tel" id="phone" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" maxlength="15" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +169,7 @@
                                 <label>Username</label>
                                 <div class="input-group">
 
-                                    <input name="username" type="text" required="" class="form-control">
+                                    <input name="username" type="text" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +179,7 @@
                                 <label>Password</label>
                                 <div class="input-group">
 
-                                    <input name="password" type="password" class="form-control" required="">
+                                    <input name="password" type="password" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +189,7 @@
                                 <label>Confirm Password</label>
                                 <div class="input-group">
 
-                                    <input name="cpassword" type="password" class="form-control" required="">
+                                    <input name="cpassword" type="password" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +226,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="subjects">Select Subjects</label>
-                                    <select name='subjects' id='subjects' class="form-control" multiple>
+                                    <select name='subjects' id='subjects' class="form-control" multiple required>
                                         <option value="math"> Mathematics </option>
                                         <option value="eng"> English </option>
                                         <option value="phy"> Physics </option>
@@ -252,7 +253,7 @@
                                     <label>Choice Of Institution</label>
                                     <div class="input-group">
                                         <!--<input name="coint" type="text" required="" class="form-control">-->
-                                        <select name="schools" id="school" class="form-control">
+                                        <select name="schools" id="school" class="form-control" required>
                                                 <option value="">----Select school----</option>
                                                 <option value="FEDERAL UNIVERSITY OF TECHNOLOGY AKURE"> FUTA</option>
                                                 <option value="UNIVERSITY OF LAGOS"> UNILAG</option>
@@ -268,14 +269,14 @@
                                     <div class="input-group">
 
                                         <!--<input name="ctstu" type="text" required="" class="form-control">-->
-                                        <select name="courses" id="courses" class="form-control">
+                                        <select name="courses" id="courses" class="form-control" required>
                                                 <option value="">----Select Course----</option>
-                                                <option value="CSC">CSC</option>
+                                                <option value="CSC">Computer Science</option>
                                                 <option vlaue="SEG">Sofware Engineering</option>
                                                 
                                         </select>
                                     </div>
-                                    <small class="text-left"><i>Course to study in your institution</i></small>
+                                    <!--<small class="text-left"><i>Course to study in your institution</i></small>-->
                                 </div>
                             </div>
 
@@ -284,7 +285,7 @@
                                     <label>Course cutoff point</label>
                                     <div class="input-group">
 
-                                        <input name="cutoff" type="text" required="" class="form-control">
+                                        <input name="cutoff" type="number" min="10" class="form-control" required>
                                         <!--
                                         <select name="cutoff" id="school">
                                                 <option value="">----Select Cutoff mark----</option>
@@ -297,7 +298,7 @@
                                         -->
 
                                     </div>
-                                    <small class="text-left"><i>Course of choice cutoff point</i>
+                                    <!--<small class="text-left"><i>Course of choice cutoff point</i>-->
                                     </small>
 
                                 </div>
@@ -310,7 +311,7 @@
                                     <label>Jamb Score</label>
                                     <div class="input-group">
 
-                                        <input name="jambscore" type="text" required="" class="form-control">
+                                        <input name="jambscore" type="number" min="10" class="form-control" required>
                                     </div>
                                     <small class="text-left"><i>Your current jamb score of out 400</i>
                                     </small>
@@ -322,7 +323,7 @@
                                     <label>What do you aspire to score</label>
                                     <div class="input-group">
 
-                                        <input name="wantscore" type="text" placeholder="e.g 75%" class="form-control" required="">
+                                        <input name="wantscore" type="text" placeholder="e.g 75%" class="form-control" required>
                                     </div>
                                     <small class="text-left"><i>what you plan to score in your post utme</i>
                                     </small>

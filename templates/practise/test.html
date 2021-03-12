@@ -8,8 +8,7 @@
         </div>
         <div class="row d-flex">
             <span class="col text-start">
-                <small >Question: 4 to 10</small>
-                <small class="">(Practise)</small>
+                <small class="">Practise(POST UTME Test)</small>
                 </span>
 
             <small class="col text-end">Duration: {{duration | durationSent}}</small>
@@ -73,24 +72,29 @@
                             <h5 class="text-left p question">{{d}}</h5>
                         </div>
 
-                        <div class="col form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{q.code}}{{d}}" id="inlineRadio1" value="A">
-                            <label class="form-check-label" for="inlineRadio1">A</label>
-                        </div>
+                        <div class="col-10">
+                            <div class="row">
 
-                        <div class="col form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{q.code}}{{d}}" id="inlineRadio2" value="B">
-                            <label class="form-check-label" for="inlineRadio2">B</label>
-                        </div>
+                                <div class="col form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="{{q.code}}{{d}}" id="inlineRadio1" value="A">
+                                    <label class="form-check-label" for="inlineRadio1">A</label>
+                                </div>
 
-                        <div class="col form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{q.code}}{{d}}" id="inlineRadio3" value="C">
-                            <label class="form-check-label" for="inlineRadio3">C</label>
-                        </div>
+                                <div class="col form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="{{q.code}}{{d}}" id="inlineRadio2" value="B">
+                                    <label class="form-check-label" for="inlineRadio2">B</label>
+                                </div>
 
-                        <div class="col form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{q.code}}{{d}}" id="inlineRadio4" value="D">
-                            <label class="form-check-label" for="inlineRadio4">D</label>
+                                <div class="col form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="{{q.code}}{{d}}" id="inlineRadio3" value="C">
+                                    <label class="form-check-label" for="inlineRadio3">C</label>
+                                </div>
+
+                                <div class="col form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="{{q.code}}{{d}}" id="inlineRadio4" value="D">
+                                    <label class="form-check-label" for="inlineRadio4">D</label>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

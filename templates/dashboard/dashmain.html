@@ -8,16 +8,15 @@
 
     <div class="dropdown-header">
         <small>Logged in as</small><br>
-        <b>Olusola Precious</b>
+        <b>{{user.last_name}} {{user.first_name}}</b>
     </div>
 
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Profile</a>
-    <a class="dropdown-item" href="#">Leaderboard</a>
-    <a class="dropdown-item" href="#">Perfomance</a>
+
+    <a class="dropdown-item" href="{% url 'practise' %}">Take a Test</a>
 
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="login.html">Logout</a>
+    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
 </div>
 {% endblock %} {% block content %}
 <div id="layoutSidenav">
@@ -155,6 +154,7 @@
                         </div>
                     </div>
 
+                    {% comment %}
                     <div class="row">
                         <div class="col-xl-6">
                             <div class="card mb-4">
@@ -173,6 +173,9 @@
                             </div>
                         </div>
                     </div>
+                    {% endcomment %}
+
+
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table mr-1"></i> Practise Records
@@ -200,13 +203,15 @@
                                     </tfoot> -->
 
                                     <tbody>
+                                        {% for record in records %}
                                         <tr>
-                                            <td>09/06/2020</td>
-                                            <td>English, Mathematics, Physics, Chemistry</td>
-                                            <td>15/24</td>
-                                            <td><a href="{% url 'result' %}" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
+                                            <td>{{record.date_taken}}</td>
+                                            <td>{% for sub in record.testscripts_set.all %}{{sub.subject.name}}, {% endfor %}</td>
+                                            <td>{{record.total_score_gotten}}/{{record.total_max_score}}</td>
+                                            <td><a href="javascript: window.location.href='/practise/result?t={{record.id}}'" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
 
                                         </tr>
+                                        {% endfor %}
 
                                     </tbody>
                                 </table>
@@ -222,10 +227,10 @@
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; 2020 New_Era.inc</div>
+                    <div class="text-muted">Copyright &copy; 2021 Genie.inc</div>
                     <div>
-                        <a href="#">Privacy Policy</a> &middot;
-                        <a href="#">Terms &amp; Conditions</a>
+                        <span>FUTA &middot;
+                        POST UTME &amp; Practise</span>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,224 @@
+<!Doctype html>
+<html lang="en">
+{% load static %} {% load percentFormat %}
+
+<head>
+    <title>Result | Genie Prep</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <!--<link href="{% static 'css/setup.css' %}" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'css/progress.css' %}">
+
+    <!-- Font awesome Pro v5.10.0 CDN -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="container bg-white rounded-lg shadow-sm my-5 py-3">
+
+
+        <div class="row mx-md-4 justify-content-around">
+
+            <h3 class="display-4">Genie Prep</h3>
+            <div class="row">
+                <div class="col">
+                    <span class="lead mb-0">Practise result</span>
+                </div>
+
+                <div class="col text-end">
+                    <span class="mb-0">Date: <strong> {{dateTaken}}</strong></span>
+                </div>
+            </div>
+
+        </div>
+        <!-- End -->
+
+
+        <hr>
+
+        <!-- User Quick info-->
+        <div class="row justify-content-evenly">
+            <p class="text-muted ">Quick info</p>
+            <div class="row text-start">
+
+                <div class="col-md-5 col-12">
+                    <img src="/media/{{user.profileimg}}" class="rounded img-responsive mx-auto d-block" alt="..." width="200" height="249">
+                </div>
+
+                <div class="col-md-5 col-sm-12">
+                    <table class="table table-borderless">
+
+                        <tbody>
+                            <tr>
+
+                                <th scope="row">Genie ID:</th>
+                                <td>{{user.genieID}}</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Full Name:</th>
+                                <td>{{user.first_name}} {{user.last_name}}</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Subjects:</th>
+                                <td>{% for sub in user.subjects.all %} {{sub.name}} | {%endfor %}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Aspirant Of:</th>
+                                <td>{{user.institution.name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <hr>
+
+        <!-- Test Info-->
+        <div class="row p-3">
+            <p class="text-muted ">Test Information</p>
+            <div class="row justify-content-evenly">
+                <div class="col-md-5 col-sm-12">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">score</th>
+                                <th scope="col">Max Score</th>
+                                <th scope="col">% score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for info in test_info%}
+                            <tr>
+                                <th scope="row">{{info.subject.name}}</th>
+                                <td>{{info.score}}</td>
+                                <td>{{info.max_score}}</td>
+                                <td>{{info.percent|percent}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- Total Summary -->
+                    <table class="table table-borderless" style="margin-top: -16px;">
+
+                        <tbody>
+                            <tr>
+                                <td><strong>Scored</strong></td>
+                                <td colspan="2">{{score_sum}} out of {{sum_total}}</td>
+
+                                <td>{{sum_percent|percent}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-5 col-sm-12 text-center">
+                    <div class="progressbar" data-animate="false">
+                        <div class="circle" data-percent="{{sum_percent | toWhole}}">
+                            <div></div>
+
+                        </div>
+                    </div>
+                    <!--<p class="lead mt-0 h3 text-center">{{sum_percent | percent}}</p>-->
+
+                </div>
+            </div>
+        </div>
+
+        <hr> {% comment %}
+        <!-- Correction Highlight-->
+        <div class="row">
+            <div class="col-lg-9 mx-auto">
+
+
+                <div class="row mb-3">
+
+                    <nav class="row">
+                        <div class="nav nav-tabs nav-justified nav-inline" id="nav-tab" role="tablist">
+                            {% for subject in subjects%} {% if forloop.counter == 1 %}
+                            <button class="nav-link active" id="nav-{{subject}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{subject}}" type="button" role="tab" aria-controls="nav-{{subject}}" aria-selected="true">
+                                        {{subject}}
+                            </button> {% else %}
+
+                            <button class="nav-link" id="nav-{{subject}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{subject}}" type="button" role="tab" aria-controls="nav-{{subject}}" aria-selected="false">
+                                        {{subject}}
+                                    </button> {% endif %} {%endfor%}
+
+                        </div>
+                        <hr>
+                    </nav>
+
+                    <div class="tab-content" id="nav-tabContent">
+
+                        {% for sub in subjects %}
+
+                        <div {% if forloop.counter is 1 %} class="tab-pane fade show active" {% else %} class="tab-pane fade" {% endif %} id="nav-{{sub}}" role="tabpanel" aria-labelledby="nav-{{sub}}-tab">
+
+                            <div class="row content">
+
+                                <span class="text-left p">1. yes</span>
+
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <!-- End -->
+
+
+
+                <!-- End -->
+
+            </div>
+        </div>
+        {% endcomment %}
+
+
+        <div class="row text-center">
+            <div class="col">
+                <a href="{% url 'dashboard' %}" class="btn btn-warning text-white  shadow-sm"> Go to Dashboard </a>
+            </div>
+            <div class="col">
+                <a href="javascript: window.location.href = '/practise/correction?t={{ref}}'" class="btn btn-primary   shadow-sm"> Check Correction</a>
+            </div>
+
+            <div class="col">
+                <a href="{% url 'practise' %}" class="btn btn-success text-white  shadow-sm"> Take Another Test </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- jQuery and Bootstrap scripts -->
+    <!-- <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script> -->
+
+    <!--<script type="text/javascript" src="{% static 'js/setup.js' %}"></script>-->
+    <script src="{% static 'js/circle-progress.min.js' %}"></script>
+    <script src="{% static 'js/script.js ' %}"></script>
+
+
+
+</body>
+
+</html>

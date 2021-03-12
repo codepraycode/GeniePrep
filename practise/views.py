@@ -1,15 +1,17 @@
 from django.http.response import Http404, HttpResponse, JsonResponse
-from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
 from pathlib import Path
 import os
 import json
 from urllib.parse import unquote
 from ast import literal_eval
-from random import sample
 from account.models import Genie_Users
 from .models import Subjects, TestLogs, TestScripts
 
+
+# ------------------ READ ANSWER DATA FROM STATIC FILE ------------------------
+# NEEDED ALL THROUGH THE APP
+# DATABASE VERSION IN CONSIDERATION
 BASE_DIR = Path(__file__).resolve().parent.parent
 static_path = os.path.join(BASE_DIR, 'static')
 
@@ -24,222 +26,8 @@ with open(filepath) as file:
     # subjects = [] # list(data.keys())
     # start = stop = 0
     
+# ------ /FILES READ AND ASSIGNED TO VARIABLE, USED EVERYWHERE IN THE APP VIEW --------
 
-# Function to turn string dict cookie to actual dict
-def getCookie(cookie):
-    # Query user_subject info from Cookie
-    user_subjects = cookie # request.COOKIES['subjects']
-    eval_user_subjects = user_subjects.strip('][')
-    subjects = literal_eval(eval_user_subjects)
-
-    return subjects
-
-############### Recording  ###########################
-# A function to minify the test data, to reduce data size for database
-def minify(data_list):
-    response = []
-
-    for each in data_list:
-        temp = {}
-        temp['No'] = each['No']
-        temp['sl'] = each['selected']
-        temp['cr'] = each['correct']
-        temp['ct'] = each['correction']
-
-        response.append(temp.copy())
-
-        temp.clear()
-
-    return response
-
-
-# A function to convert a list to a string
-
-def stringify(list_value):
-    return str(list_value)
-
-# A function to convert string of dictionaries to a tuple of dictionaries
-
-
-def destringify(string_list_value):
-    string_value = string_list_value.strip('][')
-    return literal_eval(string_value)
-
-
-# Recording 
-def record(d_marked_script=None, testLogObj=None):
-
-    if (d_marked_script is None) and (testLogObj is None):
-        return
-
-    # Record by storing the data to databse
-    for each in d_marked_script:
-        # Script keys
-        # first element is the subject code, second is the max_score, third is the obtained score
-        each_keys = tuple(each.keys())
-        sub_code = each_keys[0]
-
-        subj = Subjects.objects.get(code=sub_code) # Subject instance
-
-        data = stringify(minify(each[sub_code]))
-        scored = each['obtained']
-        maximum = each['max_score']
-
-        addScript = TestScripts.objects.create(
-            subject=subj,
-            data=data, 
-            score=scored, 
-            max_score=maximum,
-            log= testLogObj)
-        
-        addScript.save()
-    
-    return None
-
-
-################ End of Recording ############################
-
-
-# Fucntion to get question_answer range
-def get_quest_range(sub, _from=4, _to=10):
-    # sub for subject
-    quest = list(sub.keys())[2:] # excluded 'short' and 'code'
-
-    quest = list(map(int, quest)) # convert all quest element to integer
-    
-    quest_range = quest[_from-1: _to] # range requested
-
-    return quest_range
-
-def result(request):
-    '''subjects = {'ENG': 'English', 'MTH': 'Mathematics',
-                'PHY': 'Physics', 'CHM': 'Chemistry'}'''
-    """
-    Sample marked work
-    {'ENG': [{'No': '1', 'selected': 'D', 'correct': True, 'correction': 'D'}, {'No': '2', 'selected': 'C', 'correct': False, 'correction': 'B'}, {'No': '3', 'selected': 'D', 'correct': False, 'correction': 'B'}, {'No': '4', 'selected': 'A', 'correct': False, 'correction': 'D'}, {'No': '5', 'selected': 'B', 'correct': False, 'correction': 'C'}, {'No': '6', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '7', 'selected': None, 'correct': False, 'correction': 'B'}, {'No': '8', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '9', 'selected': None, 'correct': False, 'correction': 'D'}, {'No': '10', 'selected': None, 'correct': False, 'correction': 'C'}], 'max_score': 10, 'obtained': 1}
-    {'PHY': [{'No': '2', 'selected': 'C', 'correct': False, 'correction': 'B'}, {'No': '3', 'selected': 'B', 'correct': False, 'correction': 'A'}, {'No': '4', 'selected': None, 'correct': False, 'correction': 'B'}, {'No': '5', 'selected': 'D', 'correct': True, 'correction': 'D'}, {'No': '6', 'selected': 'B', 'correct': False, 'correction': 'A'}, {'No': '7', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '8', 'selected': None, 'correct': False, 'correction': 'B'}, {'No': '9', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '10', 'selected': None, 'correct': False, 'correction': 'A'}, {'No': '11', 'selected': None, 'correct': False, 'correction': 'D'}, {'No': '12', 'selected': None, 'correct': False, 'correction': 'A'}], 'max_score': 11, 'obtained': 1}
-
-    Got -> 2
-    Out of -> 21
-
-    """
-
-    
-
-    """
-    got = 2
-    total = 21
-    percent = got/total
-    print(percent)
-    testInfo = [
-        {'subject': 'English', 'score': 1, 'max_score': 10, 'percent': (1/total)},
-        {'subject': 'Physics', 'score': 1, 'max_score': 11, 'percent': (1/total)}
-        ] 
-    """
-    userID = request.session['GenieUser']
-    Guser = Genie_Users.objects.get(id=userID)
-
-    ID = request.GET.get('t',None)
-    
-    if ID is None:
-        all_ids = [x.id for x in TestLogs.objects.all()] # Already sorted
-        ID = all_ids[-1]
-    
-    test = TestLogs.objects.get(id=ID)
-    testDate = test.date_taken
-
-    got = int(test.total_score_gotten)
-    total = int(test.total_max_score)
-    percent = got/total
-
-    testInfo = test.testscripts_set.all()
-    
-    
-
-
-
-    
-    return render(request, 'result.html', {'user':Guser, 'score_sum': got, 'sum_total': total, 'sum_percent':percent, 'dateTaken':testDate, 'test_info':testInfo})
-
-def index(request):
-    return HttpResponseNotFound("Start Page still in Development")
-
-
-def decodeCookie(cookie):
-    test_data = unquote(cookie)  # Decode the URL encoding in UTF-8
-    
-    test_data = test_data.strip('][').split(' ')  # Convert string list to actual list
-    
-    # Convert string dict to actual dict
-    test_data = list(literal_eval(test_data[0]))
-    
-    return test_data
-
-
-def test(request):
-    # This Functions sends the test sheet.
-    # Requires Start, stop
-    # requires subjects
-    # requires duration
-
-    # Process the duration
-    # receives a number string from url
-    duration = request.GET.get('dur', '30') #mins
-    # print(duration)
-    # convert to float
-    
-
-    
-
-    # global start, stop
-    #start, stop = (10, 20)  # Query from cookie
-    subjects = [] # Query from cookie
-    # %2c m-> ,
-
-    test_data = request.COOKIES['testData'] # Get testData from cookie
-    # print(test_data)
-    
-    test_data = unquote(test_data) # Decode the URL encoding in UTF-8
-    # print(test_data ,'=>', type(test_data))
-    test_data = test_data.strip('][').split(' ') # Convert string list to actual list
-    # print(test_data)
-    test_data = list(literal_eval(test_data[0])) # Convert string dict to actual dict
-    # print(test_data)
-    
-    # test_data ->
-    ## [
-    #   {'name': 'English', 'start': '1', 'stop': '10'},
-    #   {'name': 'Chemistry', 'start': '1', 'stop': '10'}
-    #  ]
-
-    c = 1 # index for the dictionary
-    quest_ans = {}# {}
-    for each_data in test_data:
-        # each_data is a dictionary
-        #subjects.append(each_data['name'])
-        
-        name = each_data['name']
-        subjects.append(name)
-        sub = data[name]
-        rep_ans = get_quest_range(sub, _from=int(each_data['start']), _to=int(each_data['stop']))
-
-        temp = {'sub': name, 'code': sub['code'], 'data': rep_ans}
-
-        quest_ans[c] = temp
-        c += 1
-
-        temp = None
-        
-    # print(quest_ans)
-    
-    # print(type(quest_range[0]))
-    return render(request, 'practise/test.html',
-        {
-            'quest_range':quest_ans.values(),
-            'subjects':subjects,
-            'duration': float(duration),
-        })
-    
 
 
 # Create your views here.
@@ -254,8 +42,12 @@ def practise(request):
         {'code': 'CHM', 'name': 'Chemistry'}
     ]  # Query this info from Cookie
     """
-    # Query user_subject info from Cookie
-    user_subjects = request.COOKIES['subjects']
+    try:
+        # Query user_subject info from Cookie
+        user_subjects = request.COOKIES['subjects']
+    except:
+        return redirect('dashboard')
+
     subjects = getCookie(user_subjects)
     # print(type(subjects))
     
@@ -265,10 +57,18 @@ def practise(request):
     
     
     if request.method == 'POST':
-        test_data = request.COOKIES['testData']
+        try:
+            test_data = request.COOKIES['testData']
+        except:
+            return redirect('dashboard')
         # Sample output -> [{'name': 'English', 'start': '1', 'stop': '10', 'quest_range': 10}, {'name': 'Chemistry', 'start': '2', 'stop': '20', 'quest_range': 19}]
         # # print(decodeCookie(test_data))
+
         test_data = decodeCookie(test_data)
+        if isinstance(test_data, dict):
+            test_data = (test_data,)
+        
+        # print(test_data)
         # print("Yes!!")
         script_data = request.POST #.keys()
 
@@ -298,8 +98,11 @@ def practise(request):
 
             #print(marked_script)
             # print()
+
+        userID = request.session['GenieUser']
         
         addTest = TestLogs.objects.create(
+            Uid = userID,
             total_score_gotten=TotalScore,
             total_max_score = TotalMax,
         )
@@ -351,8 +154,20 @@ def practise(request):
             
             start_from = request.GET[start_from]
             to_stop = request.GET[to_stop]
+            if start_from == '':
+                start_from = '1'
+            
+            if to_stop == '':
+                to_stop = str(int(start_from) + 6)
 
-            start_from_to_range = len(list(range(int(start_from),int(to_stop)+1)))
+            s = int(start_from)
+            st = int(to_stop)
+
+            # If stop is less than start, set stop to start + stop
+            if st <= s:
+                st += s
+
+            start_from_to_range = len(list(range(s,st+1)))
             # print("start from {} to {}".format(start_from, to_stop))
             
             
@@ -373,8 +188,7 @@ def practise(request):
         # print(data)
         return JsonResponse(data)
         
-    if mode == 'instruction':
-        return render(request, 'practise/instructions.html', {})
+    
     
         
     # print(mode)
@@ -382,126 +196,187 @@ def practise(request):
     return render(request, 'practise/practiseMain.html', {'subjects':subjects})
     
 
+# View Function to send the test data
+def test(request):
+    # This Functions sends the test sheet.
+    # Requires Start, stop
+    # requires subjects
+    # requires duration
 
+    try:
+        test_data = request.COOKIES['testData'] # Get testData from cookie
+        # print(test_data)
+    except:
+        return redirect('practise')
 
-
-
-def dashview(request):
-    userID = request.session['GenieUser']
-    user = Genie_Users.objects.get(id=userID)
-    subj = [{'code':s.code, 'name':s.name } for s in user.subjects.all() ]
+    # Process the duration
+    # receives a number string from url
+    duration = request.GET.get('dur', '30') #mins
+    # print(duration)
+    # convert to float
     
-    # print(str(subj))
-    response = render(request, 'dashboard/dashmain.html', {'user':user})
-    response.set_cookie('subjects', str(subj))
-    return response
+
+    
+
+    # global start, stop
+    #start, stop = (10, 20)  # Query from cookie
+    subjects = [] # Query from cookie
+    # %2c m-> ,
+
+    
+    
+    test_data = unquote(test_data) # Decode the URL encoding in UTF-8
+    # print(test_data ,'=>', type(test_data))
+    test_data = test_data.strip('][') #.split(' ') # Convert string list to actual list
+    
+    test_data = literal_eval(test_data) # Convert string dict to actual dict
+    if isinstance(test_data, dict):
+        test_data =(test_data,)
+    
+    
+    # test_data ->
+    ## [
+    #   {'name': 'English', 'start': '1', 'stop': '10'},
+    #   {'name': 'Chemistry', 'start': '1', 'stop': '10'}
+    #  ]
+
+    c = 1 # index for the dictionary
+    quest_ans = {}# {}
+    for each_data in test_data:
+        # each_data is a dictionary
+        #subjects.append(each_data['name'])
+        
+        name = each_data['name']
+        subjects.append(name)
+        sub = data[name]
+
+        s = int(each_data['start'])
+        st = int(each_data['stop'])
+        # If stop is less than start, set stop to start + stop
+        if st <= s:
+            st += s
+        rep_ans = get_quest_range(sub, _from=s, _to=st)
+
+        temp = {'sub': name, 'code': sub['code'], 'data': rep_ans}
+
+        quest_ans[c] = temp
+        c += 1
+
+        temp = None
+        
+    # print(quest_ans)
+    
+    # print(type(quest_range[0]))
+    return render(request, 'practise/test.html',
+        {
+            'quest_range':quest_ans.values(),
+            'subjects':subjects,
+            'duration': float(duration),
+        })
 
 
-def profile(request):
-    userID = request.session['GenieUser']
-    user = Genie_Users.objects.get(id=userID)
-    return render(request, "dashboard/profile.html", {'user':user})
+# view funtion to display result
+def result(request):
+    """
+    subjects = {'ENG': 'English', 'MTH': 'Mathematics','PHY': 'Physics', 'CHM': 'Chemistry'}
+    
+    Sample marked work
+    {'ENG': [{'No': '1', 'selected': 'D', 'correct': True, 'correction': 'D'}, {'No': '2', 'selected': 'C', 'correct': False, 'correction': 'B'}, {'No': '3', 'selected': 'D', 'correct': False, 'correction': 'B'}, {'No': '4', 'selected': 'A', 'correct': False, 'correction': 'D'}, {'No': '5', 'selected': 'B', 'correct': False, 'correction': 'C'}, {'No': '6', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '7', 'selected': None, 'correct': False, 'correction': 'B'}, {'No': '8', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '9', 'selected': None, 'correct': False, 'correction': 'D'}, {'No': '10', 'selected': None, 'correct': False, 'correction': 'C'}], 'max_score': 10, 'obtained': 1}
+    {'PHY': [{'No': '2', 'selected': 'C', 'correct': False, 'correction': 'B'}, {'No': '3', 'selected': 'B', 'correct': False, 'correction': 'A'}, {'No': '4', 'selected': None, 'correct': False, 'correction': 'B'}, {'No': '5', 'selected': 'D', 'correct': True, 'correction': 'D'}, {'No': '6', 'selected': 'B', 'correct': False, 'correction': 'A'}, {'No': '7', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '8', 'selected': None, 'correct': False, 'correction': 'B'}, {'No': '9', 'selected': None, 'correct': False, 'correction': 'C'}, {'No': '10', 'selected': None, 'correct': False, 'correction': 'A'}, {'No': '11', 'selected': None, 'correct': False, 'correction': 'D'}, {'No': '12', 'selected': None, 'correct': False, 'correction': 'A'}], 'max_score': 11, 'obtained': 1}
+
+    Got -> 2
+    Out of -> 21
+
+    """
+
+    
+
+    """
+    got = 2
+    total = 21
+    percent = got/total
+    print(percent)
+    testInfo = [
+        {'subject': 'English', 'score': 1, 'max_score': 10, 'percent': (1/total)},
+        {'subject': 'Physics', 'score': 1, 'max_score': 11, 'percent': (1/total)}
+        ] 
+    """
+    try:
+        userID = request.session['GenieUser']
+    except:
+        return redirect('login')
+    
+    Guser = Genie_Users.objects.get(id=userID)
+
+    ID = request.GET.get('t',None)
+    
+    if ID is None:
+        all_ids = [x.id for x in TestLogs.objects.filter(Uid=Guser.id)] # Already sorted
+        ID = all_ids[-1]
+    
+    test = TestLogs.objects.get(id=ID, Uid=Guser.id)
+    testDate = test.date_taken
+
+    got = int(test.total_score_gotten)
+    total = int(test.total_max_score)
+    percent = got/total
+
+    testInfo = test.testscripts_set.all()
+    
+    
 
 
-def leaderBoard(request):
-    return render(request, "dashboard/leaderboard.html")
+
+    
+    return render(request, 'practise/result.html', {'user':Guser, 'score_sum': got, 'sum_total': total, 'sum_percent':percent, 'dateTaken':testDate, 'test_info':testInfo, 'ref':ID})
 
 
-def records(request):
-    return render(request, "dashboard/records.html")
-
-
-
-
-## Function for Correction
+## View Function for Correction
 def correction(request):
     # subjects = {'ENG':'English', 'MTH':'Mathematics', 'PHY':'Physics', 'CHM':'Chemistry'}
-    user_subjects = getCookie(request.COOKIES['subjects']) 
-    subjects = {}
-    for e in user_subjects:
-        subjects[e['code']] = e['name']
+    # user_subjects = getCookie(request.COOKIES['subjects']) 
+
+    ID = request.GET.get('t',None)
     
-    # print(subjects)
+    
+    if ID is None:
+        return redirect('dashboard')
+    
+    
+    Sscript = TestLogs.objects.get(id=ID)
+
+    got = int(Sscript.total_score_gotten)
+    total = int(Sscript.total_max_score)
+    percent = got/total
+
+    sData = Sscript.testscripts_set.all()
+    subject_list = [sub.subject.name for sub in sData]
     response = []
+    
+    for sd in sData:
+        dname = sd.subject.name
+        dcode = sd.subject.code
+        # destringify first, deminify next
+        dsub_data = deminify(destringify(sd.data))
+        dscore = sd.score
+        dprep = {
+            'sub': dname, 'code': dcode,
+            'subject_data': dsub_data, 
+            'score_obtained': dscore
+            }
+        
+        response.append(dprep)
+        
 
-    scripts =[
-        {
-            'ENG':
-                [
-                    {'No': '1', 'selected': 'A', 'correct': False, 'correction': 'D'},
-                    {'No': '2', 'selected': 'B', 'correct': True, 'correction': 'B'},
-                    {'No': '3', 'selected': None, 'correct': False, 'correction': 'B'},
-                    {'No': '4', 'selected': 'A', 'correct': False, 'correction': 'D'},
-                    {'No': '5', 'selected': 'C', 'correct': True, 'correction': 'C'},
-                    {'No': '6', 'selected': 'D', 'correct': False, 'correction': 'C'},
-                    {'No': '7', 'selected': None, 'correct': False, 'correction': 'B'},
-                    {'No': '8', 'selected': None, 'correct': False, 'correction': 'C'},
-                    {'No': '9', 'selected': None, 'correct': False, 'correction': 'D'},
-                    {'No': '10', 'selected': None, 'correct': False, 'correction': 'C'}
-                ],
-            'max_score': 10,
-            'obtained': 2
-        }, 
-        {
-            'CHM': 
-                [
-                    {'No': '2', 'selected': 'D', 'correct': False, 'correction': 'B'}, 
-                    {'No': '3', 'selected': 'B', 'correct': False, 'correction': 'A'},
-                    {'No': '4', 'selected': 'C', 'correct': False, 'correction': 'A'}, 
-                    {'No': '5', 'selected': 'B', 'correct': False, 'correction': 'C'}, 
-                    {'No': '6', 'selected': 'A', 'correct': False, 'correction': 'D'}, 
-                    {'No': '7', 'selected': None, 'correct': False, 'correction': 'D'}, 
-                    {'No': '8', 'selected': None, 'correct': False, 'correction': 'D'}, 
-                    {'No': '9', 'selected': None, 'correct': False, 'correction': 'D'}, 
-                    {'No': '10', 'selected': None, 'correct': None, 'correction': None}, 
-                    {'No': '11', 'selected': None, 'correct': False, 'correction': 'D'}, 
-                    {'No': '12', 'selected': None, 'correct': False, 'correction': 'A'}, 
-                    {'No': '13', 'selected': None, 'correct': False, 'correction': 'B'}, 
-                    {'No': '14', 'selected': None, 'correct': False, 'correction': 'C'}, 
-                    {'No': '15', 'selected': None, 'correct': None, 'correction': None},
-                    {'No': '16', 'selected': None, 'correct': False, 'correction': 'D'}, 
-                    {'No': '17', 'selected': None, 'correct': False, 'correction': 'B'}, 
-                    {'No': '18', 'selected': None, 'correct': False, 'correction': 'C'}, 
-                    {'No': '19', 'selected': None, 'correct': False, 'correction': 'B'}, 
-                    {'No': '20', 'selected': None, 'correct': False, 'correction': 'D'}
-                ],
-            'max_score': 19,
-            'obtained': 0
-        }
-    ]
-
-
-    # {name:str, code:str, script:list(dict), score_gotten:int }
-    subject_list = []# list(subjects.values())
-    for script in scripts:
-        # subject code is the first key in the script dictionary
-        subCode = list(script.keys())[0] # subCode
-        subName = subjects[subCode] # subject name
-        subject_list.append(subName)
-
-        subScript = script[subCode] # script
-        score_obtained = script['obtained']
-
-        temp = {'sub': subName, 'code': subCode, 'subject_data': subScript, 'score_obtained': score_obtained}
-        response.append(temp)
-        temp = None
-
-    # print(response)
-
-
-
-    # print(response)
-    # subject_list = list(subjects.values())
-
-    context = {'subjects': subject_list, 'data': response}
-    # print()
-    # print(context['data'])
+    context = {'subjects': subject_list, 'data': response, 'ref':ID, 'sdate':Sscript.date_taken, 'got':got, 'total':total, 'percent':percent}
     
 
+    return render(request, 'practise/correction.html', context)
 
-    return render(request, 'check_test.html', context)#,'reply': response.values()})
 
 
+
+#------------------------------ Functions -----------------------
 # Order of arguments
 # testData first, userSubject second, and examSubmittedData third
 def ParseDataForMarking(examData, userSubjects, examResponse):
@@ -723,8 +598,115 @@ def marker(practise_data, user_practise_data, addBonus=False):
     return result  # Marked :)
 
     
+# Function to turn string dict cookie to actual dict
+def getCookie(cookie):
+    # Query user_subject info from Cookie
+    user_subjects = cookie # request.COOKIES['subjects']
+    eval_user_subjects = user_subjects.strip('][')
+    subjects = literal_eval(eval_user_subjects)
+
+    return subjects
+
+############### Recording  ###########################
+# A function to minify the test data, to reduce data size for database
+def minify(data_list):
+    response = []
+
+    for each in data_list:
+        temp = {}
+        temp['No'] = each['No']
+        temp['sl'] = each['selected']
+        temp['cr'] = each['correct']
+        temp['ct'] = each['correction']
+
+        response.append(temp.copy())
+
+        temp.clear()
+
+    return response
+
+# A function to reverse the minified  test data from database
+# to return to it's original form
+def deminify(data_list):
+    response = []
+
+    for each in data_list:
+        temp = {}
+        temp['No'] = each['No']
+        temp['selected'] = each['sl']
+        temp['correct'] = each['cr']
+        temp['correction'] = each['ct']
+
+        response.append(temp.copy())
+
+        temp.clear()
+
+    return response
+
+# A function to convert a list to a string
+def stringify(list_value):
+    return str(list_value)
+
+# A function to convert string of dictionaries to a tuple of dictionaries
+def destringify(string_list_value):
+    string_value = string_list_value.strip('][')
+    return literal_eval(string_value)
 
 
+# Recording 
+def record(d_marked_script=None, testLogObj=None):
+
+    if (d_marked_script is None) and (testLogObj is None):
+        return
+
+    # Record by storing the data to databse
+    for each in d_marked_script:
+        # Script keys
+        # first element is the subject code, second is the max_score, third is the obtained score
+        each_keys = tuple(each.keys())
+        sub_code = each_keys[0]
+
+        subj = Subjects.objects.get(code=sub_code) # Subject instance
+
+        data = stringify(minify(each[sub_code]))
+        scored = each['obtained']
+        maximum = each['max_score']
+
+        addScript = TestScripts.objects.create(
+            subject=subj,
+            data=data, 
+            score=scored, 
+            max_score=maximum,
+            log= testLogObj)
+        
+        addScript.save()
     
+    return None
 
 
+################ End of Recording ############################
+
+
+# Fucntion to get question_answer range
+def get_quest_range(sub, _from=4, _to=10):
+    # sub for subject
+    quest = list(sub.keys())[2:] # excluded 'short' and 'code'
+
+    quest = list(map(int, quest)) # convert all quest element to integer
+    
+    quest_range = quest[_from-1: _to] # range requested
+
+    return quest_range
+
+
+def decodeCookie(cookie):
+    test_data = unquote(cookie)  # Decode the URL encoding in UTF-8
+    
+    test_data = test_data.strip('][')  # Convert string list to actual list
+    
+    # Convert string dict to actual dict
+    test_data = literal_eval(test_data)
+    
+    return test_data
+
+#------------------------------ /Functions -----------------------

@@ -48,9 +48,9 @@ class Genie_Users(models.Model):
         ('FUTA', 'Federal University Of Technology Akure'),
     )
     """
-
+    genieID = models.CharField(max_length=30)
     profileimg = models.ImageField(
-        upload_to='profilepics', default='static/img/profile_placeholder.jpg')
+        upload_to='profilepics', default='/static/img/profile_placeholder.jpg')
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)

@@ -33,6 +33,7 @@ class Subjects(models.Model):
 
 
 class TestLogs(models.Model):
+    Uid = models.CharField(max_length=10, blank=False, null=False)
     #userid = models.ForeignKey(Genie_Users, on_delete=models.CASCADE)
     total_score_gotten = models.CharField(max_length=10, blank=True, null=True)
     total_max_score = models.CharField(max_length=10, blank=True, null=True)

@@ -65,7 +65,7 @@
                         <!-- Subjects -->
                         {% for subject in subjects %}
                         <div class="row mb-3">
-                            <div class="col-4">
+                            <div class="col-md-4 col-sm-12">
                                 <div class="form-check mt-2">
                                     <input class="form-check-input" type="checkbox" name="subject{{forloop.counter}}" value="{{subject.name}}" id="subj{{forloop.counter}}">
                                     <label class="form-check-label" for="subj{{forloop.counter}}">
@@ -73,19 +73,19 @@
                                             </label>
                                 </div>
                             </div>
-                            <div class="col-8 ml-0">
+                            <div class="col-md-8 col-sm-12 ml-0">
                                 <div class="row row-cols-2">
-                                    <div class="col">
+                                    <div class="col-12 col-sm-6">
                                         <div class="input-group">
                                             <div class="input-group-text">from</div>
-                                            <input type="number" class="form-control" name="{{subject.code}}_from" id="subj{{forloop.counter}}_from" placeholder="set start">
+                                            <input type="number" min="1" max="200" class="form-control" name="{{subject.code}}_from" id="subj{{forloop.counter}}_from" placeholder="set start" required>
                                         </div>
                                     </div>
 
-                                    <div class="col">
+                                    <div class="col-12 col-sm-6">
                                         <div class="input-group">
                                             <div class="input-group-text">to</div>
-                                            <input type="number" class="form-control " name="{{subject.code}}_to" id="subj{{forloop.counter}}_to" placeholder="set stop">
+                                            <input type="number" min="1" max="200" class="form-control " name="{{subject.code}}_to" id="subj{{forloop.counter}}_to" placeholder="set stop" required>
                                         </div>
                                     </div>
                                 </div>
@@ -200,7 +200,7 @@
                                 <div class="form-group">
                                     <!-- Input group, just add class 'clockpicker', and optional data-* -->
                                     <div class="input-group clockpicker" data-align="top" data-autoclose="true" data-twelvehour="true">
-                                        <input type="text" class="form-control" value="00:00" name="timeset" id="timerset">
+                                        <input type="text" class="form-control" value="30:00" name="timeset" id="timerset" required>
                                         <span class="input-group-text">
                                             <i class="fas fa-clock "></i>
                                         </span>
@@ -216,8 +216,8 @@
                         </div>
 
                         <div class="row mt-3 text-start">
-                            <div class="col-6">
-                                Total Questions: 10
+                            <div class="col text-start">
+                                <span class="text-muted small">Make sure you have related FUTA questions copy with you</span>
                             </div>
                             <div class="col-6">
                                 <span>Time: <strong class="small" id="timeParse">--:--</strong></span>
@@ -274,6 +274,8 @@
                         <li>Please get a hard copy of FUTA PUTME past question for your subjects with you before you begin
                         </li>
                         <li> Make sure you select the right option to the question.
+                        </li>
+                        <li> Do not Refresh, if you try submitting and nothing happens, wait and make sure you have an active internet connection.
                         </li>
 
                         <li>Press the start button below to begin, Good Luck.

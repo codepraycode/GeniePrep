@@ -1,6 +1,6 @@
 /*=====================
-		CIRCLE PROGRESS BAR
-	======================*/
+CIRCLE PROGRESS BAR
+======================*/
 
 .progressbar {
     display: inline-block;
@@ -58,4 +58,16 @@
     display: block;
     color: white;
     margin-top: 12px;
+}
+
+
+/*
+Content
+*/
+
+@media only screen and (min-width: 600px),
+only screen and (min-width: 600px) {
+    .container {
+        width: max-content;
+    }
 }

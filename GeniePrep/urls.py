@@ -19,10 +19,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+admin.site.site_header = "GENIE Administrator"
+admin.site.site_title = "GENIE Administrator"
+admin.site.index_title = 'Welcome'
+
 urlpatterns = [
     path('', include('account.urls')),
     path('practise/', include('practise.urls')),
-    path('admin/', admin.site.urls),
+    path('gniadmin/', admin.site.urls),
 ]
 
 urlpatterns = urlpatterns + \

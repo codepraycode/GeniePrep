@@ -35,9 +35,9 @@ $(function() {
     // During or after test
     $("#submit_test").on('click', function(e) {
         e.preventDefault();
-        console.log("Practise Submitted");
+        // console.log("Practise Submitted");
         var answer_sheet = $("#sheet").serialize();
-        console.log(answer_sheet);
+        // console.log(answer_sheet);
 
 
         $.ajax({
@@ -46,14 +46,14 @@ $(function() {
             data: answer_sheet,
             //dataType: "json",
             success: function(data) {
-                //console.log(data, status);
-                console.log("answers Submitted");
-                window.location = `result?t=${data}`;
+                //// console.log(data, status);
+                // console.log("answers Submitted");
+                window.location = `result`;
             },
             error: function(xhr, errmsg, err) {
                 $('#notify').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                    " Please Check you Internet Connection <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                // console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
             }
         });
 
