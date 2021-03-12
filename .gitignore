@@ -13,3 +13,6 @@ templates\try.html
 
 # Database
 db.sqlite3
+
+# environment variable
+.env
