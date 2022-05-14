@@ -1,0 +1,10 @@
+## Environment variables
+.env
+
+## Node packages
+node_modules
+
+# Python caches
+__pycache__
+# SQL lite Database
+db.sqlite3
