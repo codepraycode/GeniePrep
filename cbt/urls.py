@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import IndexView
+from .views import QuestionView, SubmitView
 
 urlpatterns = [
-    path('', view=IndexView.as_view(), name="index"),   
+    path('questions', view=QuestionView.as_view(), name="question"),
+    path('submit', view=SubmitView.as_view(), name="submit"),
 ]
