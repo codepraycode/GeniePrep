@@ -3,7 +3,8 @@ from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Questions
+from .models import Questions, TestLogs
+from users.models import Users
 
 # Create your views here.
 
@@ -53,18 +54,31 @@ class QuestionView(APIView):
         # print(questions)
         return Response(questions, status=status.HTTP_200_OK);
 
-class SubmitView(APIView):
+class TestView(APIView):
     # serializer_class = SubmitSerializer
     
     def post(self, req):
         
         # print("Data >> ",req.data)
-        res = getReport(req.data)
+        fellow = Users.objects.last()
+        res = getReport(req.data, fellow)
         
         return Response(res, status=status.HTTP_200_OK)
 
+    def get(self,req):
+        fellow = Users.objects.last()
+        
+        logs = TestLogs.objects.filter(user=fellow.id)
+        
+        res = []
+        
+        for i in logs:
+            res.append(i.getLog())
+        
+        return Response(res, status=status.HTTP_200_OK)
+        
 
-def getReport(data):
+def getReport(data, user):
     ''' 
     [
         {
@@ -77,8 +91,9 @@ def getReport(data):
         }
     ] 
     '''
+    
     markings =  []
-    corrects = 0
+    obtained = 0
     
     total = len(data)
 
@@ -99,18 +114,19 @@ def getReport(data):
         # print(answer)
         correct = d_quest.isCorrect(answer)
         
-        if(correct): corrects +=1 
+        if(correct):
+            obtained += 1
 
         markings.append({
             **each,
             "correct": correct
         })
 
-    percentage = round(corrects/total, 2)
+    # percentage = round(obtained/total, 2)
     
-    return {
-        "data":markings,
-        "total_correct":corrects,
-        "total":total,
-        "percentage":percentage
-    }
+    # Add the Log
+    log = TestLogs.objects.create(user=user, obtained=obtained, max_obtainable=total, data=f"""{markings}""")
+    
+    log.save()
+    
+    return log.getLog()
