@@ -65,10 +65,15 @@ class TestView(APIView):
         
         return Response(res, status=status.HTTP_200_OK)
 
-    def get(self,req):
+    def get(self, req, testId=None):
+        # print(testId)
         fellow = Users.objects.last()
         
-        logs = TestLogs.objects.filter(user=fellow.id)
+        if(testId is not None):
+            
+            logs = TestLogs.objects.filter(user=fellow.id, id=testId)
+        else:
+            logs = TestLogs.objects.filter(user=fellow.id)
         
         res = []
         

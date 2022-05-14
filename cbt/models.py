@@ -75,6 +75,7 @@ class TestLogs(models.Model):
     
     def getLog(self):
         return {
+            "id":self.id,
             "data": self.convertToJSON(self.data),
             "obtained": self.obtained,
             "obtainable": self.max_obtainable,

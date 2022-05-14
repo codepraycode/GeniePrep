@@ -4,5 +4,5 @@ from .views import QuestionView, TestView
 urlpatterns = [
     path('questions', view=QuestionView.as_view(), name="question"),
     path('tests', view=TestView.as_view(), name="test"),
-    path('tests/<str:testId>', view=TestView.as_view(), name="see-test"),
+    path('tests', view=TestView.as_view(), name="test"),
 ]
