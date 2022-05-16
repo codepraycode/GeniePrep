@@ -1,5 +1,2 @@
-body {
-    background: whitesmoke;
-    color: grey;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-}
+@import 'root.css';
+@import 'components.css'
