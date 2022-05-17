@@ -3,12 +3,15 @@ body {
     background: $white; //var(--white, white);
     color: $black; //$var(--black, black);
     font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 300;
 }
 
+.practise_setup_container,
 .auth_container {
     width: 100%;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -69,6 +72,71 @@ body {
             margin: 0 auto;
             // margin: 10px auto;
         }
+    }
+}
+
+.practise_setup_container {
+    .intro {
+        text-align: center;
+    }
+    .setup_card {
+        width: 600px;
+        max-width: 90%;
+        margin-top: 20px;
+        padding: 22px 5px;
+        font-size: 15px;
+        font-weight: 400;
+        div {
+            h5 {
+                font-size: 15px;
+            }
+            padding: 10px;
+        }
+        .selectors {
+            text-align: center;
+        }
+        .instructions {
+            margin: -20px 0;
+            ol {
+                // background: grey;
+                padding: 8px 12px;
+                li {
+                    margin: 10px 8px;
+                    padding: 8px;
+                }
+            }
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            // td {
+            //     text-align: start;
+            //     strong {
+            //         text-align: end;
+            //     }
+            // }
+        }
+        button {
+            display: block;
+            max-width: 50%;
+            margin: 10px auto;
+            &.active {
+                border: none;
+            }
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            button {
+                margin: 0 !important;
+            }
+        }
+        // button {
+        //     display: block;
+        //     width: 50%;
+        //     margin: 10px auto;
+        // }
     }
 }
 
@@ -169,19 +237,42 @@ footer {
             width: 90%;
         }
     }
-    .records {
-        table {
-            text-align: center;
-            font-size: 14px;
-        }
-    }
-}
-
-@media (max-width:580px) {
+    // .records {
+    //     table {
+    //         text-align: center;
+    //         font-size: 14px;
+    //     }
+    // }
     .records {
         table {
             text-align: center;
             font-size: 10px;
+        }
+    }
+    .practise_setup_container {
+        width: 100%;
+        .intro {
+            width: 100%;
+            text-align: center;
+            h3: {
+                font-size: 20px;
+            }
+        }
+        .practise_card {
+            width: 100%;
+            margin-top: 20px;
+            div {
+                text-align: center;
+                h5 {
+                    font-size: 15px;
+                }
+                padding: 5px;
+            }
+            button {
+                display: block;
+                width: 50%;
+                margin: 10px auto;
+            }
         }
     }
 }

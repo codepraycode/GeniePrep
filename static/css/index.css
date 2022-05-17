@@ -2,10 +2,12 @@
   padding: 9px 15px;
   border: 1px solid #000;
   background: whitesmoke;
+  min-width: 150px;
 }
 .btn.active {
   color: #fff;
   background: #000;
+  border: none;
 }
 
 a {
@@ -44,12 +46,15 @@ body {
   background: #fff;
   color: #000;
   font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 300;
 }
 
+.practise_setup_container,
 .auth_container {
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -108,6 +113,57 @@ body {
   display: block;
   width: 200px;
   margin: 0 auto;
+}
+
+.practise_setup_container .intro {
+  text-align: center;
+}
+.practise_setup_container .setup_card {
+  width: 600px;
+  max-width: 90%;
+  margin-top: 20px;
+  padding: 22px 5px;
+  font-size: 15px;
+  font-weight: 400;
+}
+.practise_setup_container .setup_card div {
+  padding: 10px;
+}
+.practise_setup_container .setup_card div h5 {
+  font-size: 15px;
+}
+.practise_setup_container .setup_card .selectors {
+  text-align: center;
+}
+.practise_setup_container .setup_card .instructions {
+  margin: -20px 0;
+}
+.practise_setup_container .setup_card .instructions ol {
+  padding: 8px 12px;
+}
+.practise_setup_container .setup_card .instructions ol li {
+  margin: 10px 8px;
+  padding: 8px;
+}
+.practise_setup_container .setup_card table {
+  width: 80%;
+  margin: 0 auto;
+}
+.practise_setup_container .setup_card button {
+  display: block;
+  max-width: 50%;
+  margin: 10px auto;
+}
+.practise_setup_container .setup_card button.active {
+  border: none;
+}
+.practise_setup_container .setup_card .buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.practise_setup_container .setup_card .buttons button {
+  margin: 0 !important;
 }
 
 header {
@@ -204,13 +260,32 @@ footer span {
 
   .records table {
     text-align: center;
-    font-size: 14px;
-  }
-}
-@media (max-width: 580px) {
-  .records table {
-    text-align: center;
     font-size: 10px;
+  }
+
+  .practise_setup_container {
+    width: 100%;
+  }
+  .practise_setup_container .intro {
+    width: 100%;
+    text-align: center;
+    h3-font-size: 20px;
+  }
+  .practise_setup_container .practise_card {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .practise_setup_container .practise_card div {
+    text-align: center;
+    padding: 5px;
+  }
+  .practise_setup_container .practise_card div h5 {
+    font-size: 15px;
+  }
+  .practise_setup_container .practise_card button {
+    display: block;
+    width: 50%;
+    margin: 10px auto;
   }
 }
 @media print {
