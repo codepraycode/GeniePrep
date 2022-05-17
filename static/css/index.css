@@ -134,6 +134,7 @@ header ul li a {
 
 .course_display .courses .course_item {
   margin-right: 8px;
+  cursor: pointer;
 }
 .course_display .courses .course_item:last-of-type {
   margin-right: 0;

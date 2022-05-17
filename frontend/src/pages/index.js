@@ -8,6 +8,9 @@ import SignUp from '../components/signup';
 
 // Dashboard
 import Dashboard from './dashbaord';
+// Test
+import Test from './test';
+
 // Result
 import Result from './result';
 
@@ -27,6 +30,9 @@ const Pages = () => {
                 <Route path=":id" element={<Result/>}/>
                 {/* <Route path=":id/correction" element={<Result/>}/> */}
             </Route>
+
+            <Route path="test" element={<Test/>}/>
+
             
 
             <Route
