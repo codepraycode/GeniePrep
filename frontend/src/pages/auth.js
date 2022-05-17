@@ -4,8 +4,12 @@ const Auth = () => {
     return (
         <div>
             <h3>Authentication Page</h3>
-            <Link to="/signin">Login</Link>
+
+            <div className="nav">
+                <Link to="/signin">Login</Link>
             <Link to="/signup">Register</Link>
+            </div>
+            
             <hr/>
             <Outlet/>
         </div>
