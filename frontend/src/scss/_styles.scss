@@ -86,8 +86,10 @@ header {
         padding: 0 !important;
         li {
             display: inline-block;
-            font-size: 25px;
             margin: 5px 20px;
+            a {
+                font-size: 25px;
+            }
         }
     }
 }

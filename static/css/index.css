@@ -126,8 +126,10 @@ header ul {
 }
 header ul li {
   display: inline-block;
-  font-size: 25px;
   margin: 5px 20px;
+}
+header ul li a {
+  font-size: 25px;
 }
 
 .course_display .courses .course_item {

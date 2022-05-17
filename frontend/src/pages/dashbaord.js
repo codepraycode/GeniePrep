@@ -5,6 +5,7 @@ import Header from '../components/header';
 import Courses from '../components/course_display';
 import Records from '../components/records';
 import Footer from '../components/footer';
+import { Link } from 'react-router-dom';
 
 
 
@@ -17,16 +18,16 @@ const Dashboard = (props) => {
                 <div className="nav">
                     <ul>
                         <li>
-                            <span>
+                            <Link to={'#'}>
                                 
                                 <i className="fas fa-user"></i>
-                            </span>
+                            </Link>
                         </li>
 
                         <li>
-                            <span>
+                            <Link to={'/signin'}>
                                 <i className="fas fa-solid fa-power-off"></i>
-                            </span>
+                            </Link>
                         </li>
                     </ul>
                 </div>
