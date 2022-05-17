@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from '../components/header';
 
-import Courses from '../components/course_display';
+import Courses from '../components/course/course_display';
 import Records from '../components/records';
 import Footer from '../components/footer';
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ const Dashboard = (props) => {
                         </li>
 
                         <li>
-                            <Link to={'/signin'}>
+                            <Link to={'/signin'} className="btn">
                                 <i className="fas fa-solid fa-power-off"></i>
                             </Link>
                         </li>
@@ -39,7 +39,7 @@ const Dashboard = (props) => {
             <Records/>
 
             
-            <Footer/>
+            <Footer className="card"/>
 
         </>
         

@@ -144,13 +144,37 @@ footer {
   align-items: center;
   justify-content: space-between;
   padding: 14px;
-  font-size: 14px;
+  font-size: 12px;
 }
 footer span {
   margin-right: 12px;
 }
 
-@media (max-width: 480px) {
+.result {
+  width: max-content;
+}
+.result .result_info {
+  text-align: center;
+}
+.result .result_info .info {
+  width: 70%;
+  margin: 0 auto;
+}
+.result .result_info .info th {
+  text-align: start;
+}
+.result .result_info .info td {
+  text-align: end;
+}
+.result footer {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+@media (max-width: 580px) {
   .auth_card .utils {
     flex-direction: column;
   }
@@ -169,9 +193,31 @@ footer span {
 
   .courses {
     flex-direction: column;
+    align-items: center;
+    justify-content: ce;
   }
   .courses .course_item {
-    margin: 20px 10px;
+    margin: 20px 0;
+    width: 90%;
+  }
+
+  .records table {
+    text-align: center;
+    font-size: 14px;
+  }
+}
+@media (max-width: 580px) {
+  .records table {
+    text-align: center;
+    font-size: 10px;
+  }
+}
+@media print {
+  .result .cta {
+    display: none;
+  }
+  .result footer {
+    display: flex;
   }
 }
 

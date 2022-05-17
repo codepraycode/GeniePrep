@@ -8,6 +8,8 @@ import SignUp from '../components/signup';
 
 // Dashboard
 import Dashboard from './dashbaord';
+// Result
+import Result from './result';
 
 const Pages = () => {
     return (
@@ -20,6 +22,12 @@ const Pages = () => {
 
 
             <Route path="dashboard" element={<Dashboard/>}/>
+
+            <Route path="/result" element={<Result/>}>
+                <Route path=":id" element={<Result/>}/>
+                {/* <Route path=":id/correction" element={<Result/>}/> */}
+            </Route>
+            
 
             <Route
                 path="*"
