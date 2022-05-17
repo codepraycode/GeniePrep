@@ -19,31 +19,32 @@ const Selection = (props) => {
 
     template = options.map((option,i)=>{
             return(
-                <label htmlFor={`${name}_option`} key={i}>
-                    <input type={type} name={name} id={`${name}_option`}  onChange={inputHandler}/>
+                <div className="form-check form-check-inline" key={i}>
+                    <input 
+                        type={type} 
+                        name={name} 
+                        id={`${option}_option`}
+                        onChange={inputHandler}
+                        className="form-check-input"
+                    />
 
-                    <span>{option}</span>
-                </label>
+                    <label 
+                        htmlFor={`${option}_option`} 
+                        className="form-check-label"
+                    >
+                        <span>{option}</span>
+                    </label>
+                </div>
+                
             )
         }
     
     )
 
-
-    // const addWrapper = (template)=>{
-    //     if(wrapperprops){
-    //         return (<div {...wrapperprops}>
-    //             {template}
-    //         </div>)
-    //     }
-
-    //     return template
-    // }
-
     return (
-        <div {...wrapperprops}>
-                {template}
-            </div>
+        <div className="form_selection">
+            {template}
+        </div>
     )
 }
 
