@@ -1,16 +1,23 @@
 import React from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
+// Components
 import {Form, FormContent} from '../widgets/Form';
 import Input from '../widgets/Form/input';
 import Selection from '../widgets/Form/selection';
 import Button from '../widgets/button';
 
 const SignIn = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div>
 
             <Form 
-                submitTo={(e)=>{e.preventDefault()}} 
-                error_info="Error Space" 
+                submitTo={(e)=>{e.preventDefault(); navigate('/dashboard')}} 
+                error_info={null} //"Error Space" 
                 
             >
                 <FormContent inputHandler={(e)=>{console.log(e.target.name)}}>
@@ -34,7 +41,7 @@ const SignIn = () => {
                 </div> 
 
 
-                <Button text="Sign In" classes={"btn"}/>
+                <Button text="Sign In"  type="submit"/>
 
             </Form>
         </div>

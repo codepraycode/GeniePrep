@@ -28,6 +28,18 @@ a {
   justify-content: space-around;
 }
 
+ul li {
+  list-style: none;
+}
+
+.lead {
+  font-weight: bold;
+}
+
+.section {
+  margin: 50px auto;
+}
+
 body {
   background: #fff;
   color: #000;
@@ -98,9 +110,66 @@ body {
   margin: 0 auto;
 }
 
-@media (max-width: 320px) {
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 10px;
+  border-bottom: 2px solid #000;
+}
+header h2 {
+  font-size: 40px;
+}
+header ul {
+  display: flex;
+  padding: 0 !important;
+}
+header ul li {
+  display: inline-block;
+  font-size: 25px;
+  margin: 5px 20px;
+}
+
+.course_display .courses .course_item {
+  margin-right: 8px;
+}
+.course_display .courses .course_item:last-of-type {
+  margin-right: 0;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  font-size: 14px;
+}
+footer span {
+  margin-right: 12px;
+}
+
+@media (max-width: 480px) {
   .auth_card .utils {
     flex-direction: column;
+  }
+
+  header {
+    padding: 12px 8px;
+  }
+  header h2 {
+    font-size: 25px;
+  }
+  header ul li {
+    display: inline-block;
+    font-size: 20px;
+    margin: 5px 13px;
+  }
+
+  .courses {
+    flex-direction: column;
+  }
+  .courses .course_item {
+    margin: 20px 10px;
   }
 }
 

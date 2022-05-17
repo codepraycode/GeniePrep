@@ -1,15 +1,19 @@
 import React from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
 import {Form, FormContent} from '../widgets/Form';
 import Input from '../widgets/Form/input';
 import Selection from '../widgets/Form/selection';
 import Button from '../widgets/button';
 
 const SignUp = () => {
+    const navigate = useNavigate();
     return (
         <div>
             <Form 
-                submitTo={(e)=>{e.preventDefault()}} 
-                error_info="Error Space"    
+                submitTo={(e)=>{e.preventDefault(); navigate('/signin')}}
+                error_info={null}//"Error Space"    
             >
                 <FormContent inputHandler={(e)=>{console.log(e.target.name)}}>
                     <Input type="text" placeholder='First Name' name="first_name"/>

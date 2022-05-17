@@ -8,4 +8,6 @@ urlpatterns = [
     path('', view=index, name=''),
     path('signin', view=index, name='sigin'),
     path('signup', view=index, name='signup'),
+    
+    path('dashboard', view=index, name='dashboard'),
 ]

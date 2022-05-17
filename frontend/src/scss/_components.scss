@@ -29,3 +29,17 @@ a {
     align-items: center;
     justify-content: space-around;
 }
+
+ul {
+    li {
+        list-style: none;
+    }
+}
+
+.lead {
+    font-weight: bold;
+}
+
+.section {
+    margin: 50px auto;
+}

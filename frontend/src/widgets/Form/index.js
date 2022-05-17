@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Form ({classes, submitTo, inputHandler, error_info,children}) {
+function Form ({classes, submitTo, error_info,children}) {
     return (
         <form 
             onSubmit={submitTo} 

@@ -72,10 +72,71 @@ body {
     }
 }
 
-@media (max-width:320px) {
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 10px;
+    border-bottom: 2px solid $black;
+    h2 {
+        font-size: 40px;
+    }
+    ul {
+        display: flex;
+        padding: 0 !important;
+        li {
+            display: inline-block;
+            font-size: 25px;
+            margin: 5px 20px;
+        }
+    }
+}
+
+.course_display {
+    .courses {
+        .course_item {
+            margin-right: 8px;
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px;
+    font-size: 14px;
+    span {
+        margin-right: 12px;
+    }
+}
+
+@media (max-width:480px) {
     .auth_card {
         .utils {
             flex-direction: column;
+        }
+    }
+    header {
+        padding: 12px 8px;
+        h2 {
+            font-size: 25px;
+        }
+        ul {
+            li {
+                display: inline-block;
+                font-size: 20px;
+                margin: 5px 13px;
+            }
+        }
+    }
+    .courses {
+        flex-direction: column;
+        .course_item {
+            margin: 20px 10px;
         }
     }
 }

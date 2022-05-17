@@ -6,6 +6,9 @@ import Auth from './auth';
 import SignIn from '../components/signin';
 import SignUp from '../components/signup';
 
+// Dashboard
+import Dashboard from './dashbaord';
+
 const Pages = () => {
     return (
         <Routes>
@@ -14,6 +17,9 @@ const Pages = () => {
                 <Route path="signin" element={<SignIn/>}/>
                 <Route path="signup" element={<SignUp/>}/>
             </Route>
+
+
+            <Route path="dashboard" element={<Dashboard/>}/>
 
             <Route
                 path="*"
