@@ -34,7 +34,7 @@ const SignIn = () => {
                 </div> 
 
 
-                <Button text="Sign In"/>
+                <Button text="Sign In" classes={"btn"}/>
 
             </Form>
         </div>

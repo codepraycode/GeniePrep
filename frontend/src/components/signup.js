@@ -12,7 +12,7 @@ const SignUp = () => {
                 error_info="Error Space"    
             >
                 <FormContent inputHandler={(e)=>{console.log(e.target.name)}}>
-                    <Input type="text" placeholder='First Name' />
+                    <Input type="text" placeholder='First Name' name="first_name"/>
                     <Input type="text" placeholder='Last Name' />
 
                     <Selection 

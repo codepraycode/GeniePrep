@@ -1,0 +1,81 @@
+@import 'colors';
+body {
+    background: $white; //var(--white, white);
+    color: $black; //$var(--black, black);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.auth_container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Info 
+.error_info {
+    display: block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: $danger;
+    font-weight: bold;
+}
+
+.auth_card {
+    width: 500px;
+    padding: 22px 5px;
+    h3 {
+        font-size: 25px;
+        font-weight: 400;
+        text-align: center;
+    }
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0;
+        a {
+            width: 50%;
+            // margin: 10px;
+            &.active {
+                border: none;
+            }
+            &:not(.active) {
+                border: none;
+            }
+        }
+    }
+    form {
+        margin: 2px 8px;
+        display: flex;
+        flex-direction: column;
+        .form-control {
+            max-width: 95%;
+            margin: 10px auto;
+            border: 1px solid $black !important;
+        }
+        .utils {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 13px 5px;
+        }
+        button {
+            display: block;
+            width: 200px;
+            margin: 0 auto;
+            // margin: 10px auto;
+        }
+    }
+}
+
+@media (max-width:320px) {
+    .auth_card {
+        .utils {
+            flex-direction: column;
+        }
+    }
+}

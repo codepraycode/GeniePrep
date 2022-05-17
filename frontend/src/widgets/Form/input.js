@@ -13,14 +13,16 @@ const Input = (props) => {
     let template;
 
     if(!supported.includes(type)){
-        template = <input type="text" placeholder="-----" readOnly />
+        template = <input className="form-control" type="text" placeholder="-----" readOnly id={`${name}_input`}/>
     }
 
 
-    template = <input type={type} name={name} {...rest} onChange={inputHandler}/>
+    template = <input type={type} name={name} onChange={inputHandler} className="form-control" id={`${name}_input`}/>
 
-    return (<div>
-    {template}
+    return (
+    <div>
+        {template}
+        {/* <label htmlFor={`${name}_input`}>Email address</label> */}
     </div>)
 }
 
