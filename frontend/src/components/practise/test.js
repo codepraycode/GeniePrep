@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../header';
 import Timer from './timer';
 import Button from '../../widgets/button';
+import Modal from '../../widgets/modal';
 import Question from './question';
 import Pagination from './pagination';
 
@@ -20,11 +21,6 @@ const Test = () => {
                     <Timer/>
                 </div>
                 
-                
-
-                    
-
-                
             </Header>
 
             <div className="question_annswer card container">
@@ -33,9 +29,12 @@ const Test = () => {
 
                 <div className="cta">
                     <Button text="Previous"/>
-                    <Button text="Next"/>
+                    <Button text="Next" data-bs-toggle="modal" data-bs-target="#staticBackdrop"/>
                 </div>
 
+                <Modal title="Submit">
+                    <p>Are You Sure You Want To Submit</p>
+                </Modal>
             </div>
 
 
