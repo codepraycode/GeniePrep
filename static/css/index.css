@@ -10,6 +10,48 @@
   border: none;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 10px;
+  border-bottom: 2px solid #000;
+}
+header h2 {
+  font-size: 40px;
+}
+header ul {
+  display: flex;
+  padding: 0 !important;
+}
+header ul li {
+  display: inline-block;
+  margin: 5px 20px;
+}
+header ul li a {
+  font-size: 25px;
+}
+
+.error_info {
+  display: block;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  font-size: 12px;
+}
+footer span {
+  margin-right: 12px;
+}
+
 a {
   text-decoration: none;
   text-align: center;
@@ -57,15 +99,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.error_info {
-  display: block;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  color: #dc3545;
-  font-weight: bold;
 }
 
 .auth_card {
@@ -166,45 +199,12 @@ body {
   margin: 0 !important;
 }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 10px;
-  border-bottom: 2px solid #000;
-}
-header h2 {
-  font-size: 40px;
-}
-header ul {
-  display: flex;
-  padding: 0 !important;
-}
-header ul li {
-  display: inline-block;
-  margin: 5px 20px;
-}
-header ul li a {
-  font-size: 25px;
-}
-
 .course_display .courses .course_item {
   margin-right: 8px;
   cursor: pointer;
 }
 .course_display .courses .course_item:last-of-type {
   margin-right: 0;
-}
-
-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px;
-  font-size: 12px;
-}
-footer span {
-  margin-right: 12px;
 }
 
 .result {
@@ -229,6 +229,80 @@ footer span {
   justify-content: center;
   margin-top: 12px;
   font-size: 12px;
+}
+
+.test_container p {
+  margin: 0;
+}
+.test_container header {
+  display: flex;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  padding: 25px 15px;
+  border-bottom-color: whitesmoke;
+}
+.test_container header .timer {
+  font-weight: bold;
+  font-size: 50px;
+}
+.test_container .question_annswer {
+  width: 50%;
+  margin: 20px auto;
+}
+.test_container .question_annswer .labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.test_container .question_annswer .options {
+  margin: 20px 10px;
+}
+.test_container .question_annswer .options .option_item {
+  margin: 15px;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+.test_container .question_annswer .options .option_item.selected, .test_container .question_annswer .options .option_item:hover {
+  background: #000;
+  color: #fff;
+}
+.test_container .question_annswer .cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+.test_container .question_annswer .cta button:hover, .test_container .question_annswer .cta button:focus {
+  background: #000;
+  color: #fff;
+}
+.test_container .pagination {
+  width: 50%;
+  padding: 20px;
+}
+.test_container .pagination ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.test_container .pagination ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #b4b4b4;
+  margin: 5px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.test_container .pagination ul li.active, .test_container .pagination ul li:hover {
+  background: #000;
+  color: #fff;
 }
 
 @media (max-width: 580px) {

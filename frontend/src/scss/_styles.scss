@@ -16,16 +16,6 @@ body {
     justify-content: center;
 }
 
-// Info 
-.error_info {
-    display: block;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    color: $danger;
-    font-weight: bold;
-}
-
 .auth_card {
     width: 500px;
     padding: 22px 5px;
@@ -140,28 +130,6 @@ body {
     }
 }
 
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 10px;
-    border-bottom: 2px solid $black;
-    h2 {
-        font-size: 40px;
-    }
-    ul {
-        display: flex;
-        padding: 0 !important;
-        li {
-            display: inline-block;
-            margin: 5px 20px;
-            a {
-                font-size: 25px;
-            }
-        }
-    }
-}
-
 .course_display {
     .courses {
         .course_item {
@@ -171,17 +139,6 @@ header {
                 margin-right: 0;
             }
         }
-    }
-}
-
-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px;
-    font-size: 12px;
-    span {
-        margin-right: 12px;
     }
 }
 
@@ -206,6 +163,87 @@ footer {
         justify-content: center;
         margin-top: 12px;
         font-size: 12px;
+    }
+}
+
+.test_container {
+    p {
+        margin: 0;
+    }
+    header {
+        display: flex;
+        align-items: center;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border-radius: 5px;
+        padding: 25px 15px;
+        border-bottom-color: whitesmoke;
+        .timer {
+            font-weight: bold;
+            font-size: 50px;
+        }
+    }
+    .question_annswer {
+        width: 50%;
+        margin: 20px auto;
+        .labels {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .options {
+            margin: 20px 10px;
+            .option_item {
+                margin: 15px;
+                cursor: pointer;
+                transition: all 0.6s ease-in-out;
+                &.selected,
+                &:hover {
+                    background: $black;
+                    color: $white;
+                }
+            }
+        }
+        .cta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px;
+            button {
+                &:hover,
+                &:focus {
+                    background: $black;
+                    color: $white;
+                }
+            }
+        }
+    }
+    .pagination {
+        width: 50%;
+        padding: 20px;
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            li {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background: $grey;
+                margin: 5px 10px;
+                font-size: 15px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                &.active,
+                &:hover {
+                    background: $black;
+                    color: $white;
+                }
+            }
+        }
     }
 }
 

@@ -3,11 +3,12 @@ import React,{useState} from 'react';
 import SetUp from '../components/practise/course_setup';
 import Start from '../components/practise/start';
 
-const Test = () => {
+import Test from '../components/practise/test';
+const Practise = () => {
     // const {id} = useParams();
     const [status, setStatus] = useState({
         setup:false,
-        started:false
+        started:true//false
 
     });
 
@@ -42,10 +43,10 @@ const Test = () => {
                 !status.started ?
                     renderSetup()
                 :
-                <p>Starting Practice....</p>
+                <Test/>
             }
         </>
     );
 }
 
-export default Test;
+export default Practise;

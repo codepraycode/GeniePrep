@@ -12,6 +12,48 @@
     }
 }
 
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 10px;
+    border-bottom: 2px solid $black;
+    h2 {
+        font-size: 40px;
+    }
+    ul {
+        display: flex;
+        padding: 0 !important;
+        li {
+            display: inline-block;
+            margin: 5px 20px;
+            a {
+                font-size: 25px;
+            }
+        }
+    }
+}
+
+.error_info {
+    display: block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: $danger;
+    font-weight: bold;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px;
+    font-size: 12px;
+    span {
+        margin-right: 12px;
+    }
+}
+
 a {
     text-decoration: none;
     text-align: center;

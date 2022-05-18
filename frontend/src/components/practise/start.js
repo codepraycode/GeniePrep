@@ -67,7 +67,7 @@ const Start = ({updateStatus}) => {
 
                 </div>
 
-                <div class="text-center buttons">
+                <div className="text-center buttons">
 
                     <Button 
                         text="Back" 

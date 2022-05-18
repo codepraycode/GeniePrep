@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Header(props) {
+function Header({children, className}) {
     return (
-        <header className='container'>
-            {props.children}
+        <header className={`${className || ''} container`}>
+            {children}
         </header>
     )
 }

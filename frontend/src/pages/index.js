@@ -9,7 +9,7 @@ import SignUp from '../components/signup';
 // Dashboard
 import Dashboard from './dashbaord';
 // Test
-import Test from './test';
+import Practise from './practise';
 
 // Result
 import Result from './result';
@@ -31,7 +31,7 @@ const Pages = () => {
                 {/* <Route path=":id/correction" element={<Result/>}/> */}
             </Route>
 
-            <Route path="test" element={<Test/>}/>
+            <Route path="test" element={<Practise/>}/>
 
             
 
