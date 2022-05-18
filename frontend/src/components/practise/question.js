@@ -4,7 +4,7 @@ const Question = () => {
     return (
         <>
 
-            <div class="labels">
+            <div className="labels">
                 <p>Question 01</p>
 
                 <p>Index</p>
